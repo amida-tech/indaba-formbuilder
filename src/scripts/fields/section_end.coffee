@@ -1,6 +1,6 @@
-Formbuilder.registerField 'section_break',
+Formbuilder.registerField 'section_end',
 
-  order: 100
+  order: 101
 
   view: ""
 
