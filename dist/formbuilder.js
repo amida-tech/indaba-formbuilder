@@ -782,10 +782,9 @@
 
 (function() {
   Formbuilder.registerField('section_break', {
-    order: 0,
-    type: 'non_input',
-    view: "<label class='section-name'><%= rf.get(Formbuilder.options.mappings.LABEL) %></label>\n<p><%= rf.get(Formbuilder.options.mappings.DESCRIPTION) %></p>",
-    edit: "<div class='fb-edit-section-header'>Label</div>\n<input type='text' data-rv-input='model.<%= Formbuilder.options.mappings.LABEL %>' />\n<textarea data-rv-input='model.<%= Formbuilder.options.mappings.DESCRIPTION %>'\n  placeholder='Add a longer description to this field'></textarea>",
+    order: 100,
+    view: "",
+    edit: "",
     addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Break"
   });
 
@@ -796,7 +795,7 @@
     order: 101,
     view: "",
     edit: "",
-    addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Break"
+    addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section End"
   });
 
 }).call(this);
@@ -806,7 +805,7 @@
     order: 99,
     view: "",
     edit: "",
-    addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Break"
+    addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Start"
   });
 
 }).call(this);
