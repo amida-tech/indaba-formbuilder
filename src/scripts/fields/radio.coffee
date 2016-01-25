@@ -36,10 +36,14 @@ Formbuilder.registerField 'radio',
     # @todo
     attrs.field_options.options = [
       label: "",
-      checked: false
+      checked: false,
+      value: "",
+      skip: ""
     ,
       label: "",
-      checked: false
+      checked: false,
+      value: "",
+      skip: ""
     ]
 
     attrs

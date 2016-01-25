@@ -27,7 +27,7 @@
 .fb-field-wrapper.editing .subtemplate-wrapper{border-color:#d9e1e3;border-style:solid;margin:0;border-radius:3px}
 .fb-field-wrapper .actions-wrapper{display:none;position:absolute;bottom:-7px;right:5px;z-index:3}
 .fb-field-wrapper .actions-wrapper a{display:inline-block;background-color:#ccc;padding:2px 8px}
-.edit-response-field input,.edit-response-field textarea,.edit-response-field select{border:thin solid #ddd;border-radius:.25em;padding:.5em;display:inline-block;height:auto;vertical-align:middle}
+.edit-response-field input,.edit-response-field textarea,.edit-response-field select{border:thin solid #ddd;border-radius:.25em;padding:2px;display:inline-block;height:auto;vertical-align:middle}
 .edit-response-field input:focus,.edit-response-field textarea:focus,.edit-response-field select:focus{outline:none;border:thin solid #1abc9c}
 .edit-response-field select{font-size:14px}
 .fb-field-wrapper .actions-wrapper a.js-duplicate,.fb-edit-field-wrapper .js-add-option{background-color:#2ecc71;border:none}
@@ -53,6 +53,7 @@
 .fb-common-wrapper .fb-label-description{margin-bottom:10px}
 .fb-common-wrapper .fb-label-description input,.fb-common-wrapper .fb-label-description textarea{width:100%}
 .fb-common-wrapper .fb-label-description textarea{min-height:5em}
+.edit-response-field{margin-bottom:10px}
 .response-field-draggable-helper{border:1px dashed #ddd;background:#eee}
 .response-field-text input.rf-size-small{width:130px}
 .response-field-text input.rf-size-medium{width:300px}
@@ -65,6 +66,8 @@
 .response-field-date .month,.response-field-date .day,.response-field-date .year{width:50px}
 .response-field-time .hours,.response-field-time .minutes,.response-field-time .seconds{width:50px}
 .response-field-checkboxes .fb-option,.response-field-radio .fb-option{margin-bottom:5px;display:inline-block}
+.fb-common-checkboxes label{display:block;margin:5px 0}
+.option label{display:block;margin:5px 0}
 .response-field-website input{width:200px}
 .response-field-section_start ~ .fb-field-wrapper{padding-left:20px}
 .response-field-section_start ~ .response-field-section_start ~ .fb-field-wrapper{padding-left:40px}

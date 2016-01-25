@@ -182,7 +182,9 @@
       'click .js-add-option': 'addOption',
       'click .js-remove-option': 'removeOption',
       'click .js-default-updated': 'defaultUpdated',
-      'input .option-label-input': 'forceRender'
+      'input .option-label-input': 'forceRender',
+      'input .option-value-input': 'forceRender',
+      'input .option-skip-input': 'forceRender'
     };
 
     EditFieldView.prototype.initialize = function(options) {
@@ -213,7 +215,9 @@
       options = this.model.get(Formbuilder.options.mappings.OPTIONS) || [];
       newOption = {
         label: "",
-        checked: false
+        checked: false,
+        value: "",
+        skip: ""
       };
       if (i > -1) {
         options.splice(i + 1, 0, newOption);
@@ -579,6 +583,7 @@
         REQUIRED: 'required',
         ADMIN_ONLY: 'admin_only',
         OPTIONS: 'field_options.options',
+        SKIP: 'field_options.skip',
         DESCRIPTION: 'field_options.description',
         INCLUDE_OTHER: 'field_options.include_other_option',
         INCLUDE_BLANK: 'field_options.include_blank_option',
@@ -664,10 +669,14 @@
       attrs.field_options.options = [
         {
           label: "",
-          checked: false
+          checked: false,
+          value: "",
+          skip: ""
         }, {
           label: "",
-          checked: false
+          checked: false,
+          value: "",
+          skip: ""
         }
       ];
       return attrs;
@@ -696,10 +705,14 @@
       attrs.field_options.options = [
         {
           label: "",
-          checked: false
+          checked: false,
+          value: "",
+          skip: ""
         }, {
           label: "",
-          checked: false
+          checked: false,
+          value: "",
+          skip: ""
         }
       ];
       attrs.field_options.include_blank_option = false;
@@ -768,10 +781,14 @@
       attrs.field_options.options = [
         {
           label: "",
-          checked: false
+          checked: false,
+          value: "",
+          skip: ""
         }, {
           label: "",
-          checked: false
+          checked: false,
+          value: "",
+          skip: ""
         }
       ];
       return attrs;
@@ -897,7 +914,7 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<label>\r\n  <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.REQUIRED )) == null ? '' : __t) +
-'\' />\r\n  Required\r\n</label>\r\n<!-- label>\r\n  <input type=\'checkbox\' data-rv-checked=\'model.' +
+'\' />\r\n  Required\r\n</label>\r\n\r\n<!-- label>\r\n  <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.ADMIN_ONLY )) == null ? '' : __t) +
 '\' />\r\n  Admin only\r\n</label -->';
 
@@ -909,11 +926,11 @@ this["Formbuilder"]["templates"]["edit/common"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'fb-edit-section-header\'>Label</div>\r\n\r\n<div class=\'fb-common-wrapper\'>\r\n  <div class=\'fb-label-description\'>\r\n    ' +
+__p += '<div class=\'fb-edit-section-header\'>Label</div>\r\n\r\n<div class=\'fb-common-wrapper\'>\r\n    <div class=\'fb-label-description\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
-'\r\n  </div>\r\n  <div class=\'fb-common-checkboxes\'>\r\n    ' +
+'\r\n    </div>\r\n    <div class=\'fb-common-checkboxes\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/checkboxes']() )) == null ? '' : __t) +
-'\r\n  </div>\r\n  <div class=\'fb-clear\'></div>\r\n</div>\r\n';
+'\r\n    </div>\r\n    <div class=\'fb-clear\'></div>\r\n</div>\r\n';
 
 }
 return __p
@@ -939,7 +956,9 @@ __p += '<input type=\'text\' data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.LABEL )) == null ? '' : __t) +
 '\' />\r\n<textarea data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.DESCRIPTION )) == null ? '' : __t) +
-'\'\r\n  placeholder=\'Add a longer description to this field\'></textarea>';
+'\'\r\n          placeholder=\'Add a longer description to this field\'></textarea>\r\n<label>\r\n    Skip:\r\n    <input type=\'text\' data-rv-input=\'model.' +
+((__t = ( Formbuilder.options.mappings.SKIP )) == null ? '' : __t) +
+'\' />\r\n</label>\r\n';
 
 }
 return __p
@@ -982,23 +1001,23 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<div class=\'fb-edit-section-header\'>Options</div>\r\n\r\n';
  if (typeof includeBlank !== 'undefined'){ ;
-__p += '\r\n  <label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
+__p += '\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.INCLUDE_BLANK )) == null ? '' : __t) +
-'\' />\r\n    Include blank\r\n  </label>\r\n';
+'\' />\r\n    Include blank\r\n</label>\r\n';
  } ;
 __p += '\r\n\r\n<div class=\'option\' data-rv-each-option=\'model.' +
 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) +
-'\'>\r\n  <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" />\r\n  <input type="text" data-rv-input="option:label" class=\'option-label-input\' />\r\n  <a class="js-add-option ' +
+'\'>\r\n    <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" />\r\n    <a class="js-add-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-'" title="Add Option"><i class=\'fa fa-plus-circle\'></i></a>\r\n  <a class="js-remove-option ' +
+'" title="Add Option"><i class=\'fa fa-plus-circle\'></i></a>\r\n    <a class="js-remove-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-'" title="Remove Option"><i class=\'fa fa-minus-circle\'></i></a>\r\n</div>\r\n\r\n';
+'" title="Remove Option"><i class=\'fa fa-minus-circle\'></i></a>\r\n    <label>\r\n        Text:\r\n        <input type="text" class="option-label-input" data-rv-input="option:label" />\r\n    </label>\r\n    <label>\r\n        Value:\r\n        <input type="text" class="option-value-input" data-rv-input="option:value" />\r\n    </label>\r\n    <label>\r\n        Skip:\r\n        <input type="text" class="option-skip-input" data-rv-input="option:skip" />\r\n    </label>\r\n</div>\r\n\r\n';
  if (typeof includeOther !== 'undefined'){ ;
-__p += '\r\n  <label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
+__p += '\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
-'\' />\r\n    Include "other"\r\n  </label>\r\n';
+'\' />\r\n    Include "other"\r\n</label>\r\n';
  } ;
-__p += '\r\n\r\n<div class=\'fb-bottom-add\'>\r\n  <a class="js-add-option ' +
+__p += '\r\n\r\n<div class=\'fb-bottom-add\'>\r\n    <a class="js-add-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
 '">Add option</a>\r\n</div>\r\n';
 

@@ -76,6 +76,8 @@ class EditFieldView extends Backbone.View
     'click .js-remove-option': 'removeOption'
     'click .js-default-updated': 'defaultUpdated'
     'input .option-label-input': 'forceRender'
+    'input .option-value-input': 'forceRender'
+    'input .option-skip-input': 'forceRender'
 
   initialize: (options) ->
     {@parentView} = options
@@ -96,7 +98,7 @@ class EditFieldView extends Backbone.View
     $el = $(e.currentTarget)
     i = @$el.find('.option').index($el.closest('.option'))
     options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
-    newOption = {label: "", checked: false}
+    newOption = {label: "", checked: false, value: "", skip: ""}
 
     if i > -1
       options.splice(i + 1, 0, newOption)
@@ -382,6 +384,7 @@ class Formbuilder
       REQUIRED: 'required'
       ADMIN_ONLY: 'admin_only'
       OPTIONS: 'field_options.options'
+      SKIP: 'field_options.skip'
       DESCRIPTION: 'field_options.description'
       INCLUDE_OTHER: 'field_options.include_other_option'
       INCLUDE_BLANK: 'field_options.include_blank_option'

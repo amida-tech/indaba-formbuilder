@@ -202,7 +202,7 @@ $editing-border = darken($editing-bg, 7%)
   input, textarea, select {
     border: thin solid #ddd;
     border-radius: .25em;
-    padding: .5em;
+    padding: 2px;
     display: inline-block;
     height: auto;
     vertical-align: middle;
@@ -342,6 +342,10 @@ $editing-border = darken($editing-bg, 7%)
   min-height: 5em;
 }
 
+.edit-response-field {
+  margin-bottom: 10px;
+}
+
 .response-field-draggable-helper {
   border: 1px dashed #ddd;
   background: #eee;
@@ -393,6 +397,17 @@ $editing-border = darken($editing-bg, 7%)
 .response-field-checkboxes .fb-option,.response-field-radio .fb-option {
   margin-bottom: 5px;
   display: inline-block;
+}
+
+
+.fb-common-checkboxes label {
+  display: block;
+  margin: 5px 0;
+}
+
+.option label {
+  display: block;
+  margin: 5px 0;
 }
 
 .response-field-website input {
