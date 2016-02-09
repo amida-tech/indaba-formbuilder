@@ -4,6 +4,8 @@ Formbuilder.registerField 'section_start',
 
   view: ""
 
+  type: 'non_input'
+
   edit: ""
 
   addButton: """

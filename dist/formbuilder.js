@@ -801,6 +801,7 @@
   Formbuilder.registerField('section_break', {
     order: 100,
     view: "",
+    type: 'non_input',
     edit: "",
     addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Break"
   });
@@ -811,6 +812,7 @@
   Formbuilder.registerField('section_end', {
     order: 101,
     view: "",
+    type: 'non_input',
     edit: "",
     addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section End"
   });
@@ -821,6 +823,7 @@
   Formbuilder.registerField('section_start', {
     order: 99,
     view: "",
+    type: 'non_input',
     edit: "",
     addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Start"
   });
@@ -901,6 +904,8 @@ with (obj) {
 __p +=
 ((__t = ( Formbuilder.templates['edit/base_header']() )) == null ? '' : __t) +
 '\r\n' +
+((__t = ( Formbuilder.templates['edit/common_non_input']() )) == null ? '' : __t) +
+'\r\n' +
 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t) +
 '\r\n';
 
@@ -914,7 +919,7 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<label>\r\n  <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.REQUIRED )) == null ? '' : __t) +
-'\' />\r\n  Required\r\n</label>\r\n\r\n<!-- label>\r\n  <input type=\'checkbox\' data-rv-checked=\'model.' +
+'\' />\r\n  Required\r\n</label>\r\n<!-- label>\r\n  <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.ADMIN_ONLY )) == null ? '' : __t) +
 '\' />\r\n  Admin only\r\n</label -->';
 
@@ -928,9 +933,23 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div class=\'fb-edit-section-header\'>Label</div>\r\n\r\n<div class=\'fb-common-wrapper\'>\r\n    <div class=\'fb-label-description\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
+'\r\n    </div>\r\n    <div class=\'fb-label-skip\'>\r\n        ' +
+((__t = ( Formbuilder.templates['edit/label_skip']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-common-checkboxes\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/checkboxes']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-clear\'></div>\r\n</div>\r\n';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["edit/common_non_input"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class=\'fb-edit-section-header\'>Label</div>\r\n\r\n<div class=\'fb-common-wrapper\'>\r\n  <div class=\'fb-label-description\'>\r\n    ' +
+((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
+'\r\n  </div>\r\n  <div class=\'fb-clear\'></div>\r\n</div>\r\n';
 
 }
 return __p
@@ -956,7 +975,17 @@ __p += '<input type=\'text\' data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.LABEL )) == null ? '' : __t) +
 '\' />\r\n<textarea data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.DESCRIPTION )) == null ? '' : __t) +
-'\'\r\n          placeholder=\'Add a longer description to this field\'></textarea>\r\n<label>\r\n    Skip:\r\n    <input type=\'text\' data-rv-input=\'model.' +
+'\'\r\n          placeholder=\'Add a longer description to this field\'></textarea>';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["edit/label_skip"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<label>\r\n    Skip:\r\n    <input type=\'text\' data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.SKIP )) == null ? '' : __t) +
 '\' />\r\n</label>\r\n';
 
@@ -1164,7 +1193,15 @@ this["Formbuilder"]["templates"]["view/base_non_input"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '';
+__p += '<div class=\'subtemplate-wrapper\'>\r\n    <div class=\'cover\'></div>\r\n    ' +
+((__t = ( Formbuilder.templates['view/label_non_input']({rf: rf}) )) == null ? '' : __t) +
+'\r\n\r\n    ' +
+((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
+'\r\n\r\n    ' +
+((__t = ( Formbuilder.templates['view/description']({rf: rf}) )) == null ? '' : __t) +
+'\r\n    ' +
+((__t = ( Formbuilder.templates['view/duplicate_remove']({rf: rf}) )) == null ? '' : __t) +
+'\r\n</div>\r\n';
 
 }
 return __p
@@ -1208,6 +1245,18 @@ __p += '<label>\r\n  <span>' +
 __p += '\r\n    <abbr title=\'required\'>*</abbr>\r\n  ';
  } ;
 __p += '\r\n</label>\r\n';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["view/label_non_input"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<label>\r\n  <span>' +
+((__t = ( Formbuilder.helpers.simple_format(rf.get(Formbuilder.options.mappings.LABEL)) )) == null ? '' : __t) +
+'\r\n</label>\r\n';
 
 }
 return __p

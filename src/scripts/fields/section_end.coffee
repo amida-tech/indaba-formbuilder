@@ -3,6 +3,8 @@ Formbuilder.registerField 'section_end',
   order: 101
 
   view: ""
+  
+  type: 'non_input'
 
   edit: ""
 
