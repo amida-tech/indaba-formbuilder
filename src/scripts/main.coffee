@@ -180,7 +180,7 @@ class BuilderView extends Backbone.View
     @$el.html Formbuilder.templates['page']()
 
     # Save jQuery objects for easy use
-    @$fbLeft = @$el.find('.fb-left')
+    @$fbLeft = @$el.find('.fb-menu')
     @$responseFields = @$el.find('.fb-response-fields')
 
     @bindWindowScrollEvent()

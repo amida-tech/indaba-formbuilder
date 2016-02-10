@@ -319,7 +319,7 @@
     BuilderView.prototype.render = function() {
       var subview, _i, _len, _ref5;
       this.$el.html(Formbuilder.templates['page']());
-      this.$fbLeft = this.$el.find('.fb-left');
+      this.$fbLeft = this.$el.find('.fb-menu');
       this.$responseFields = this.$el.find('.fb-response-fields');
       this.bindWindowScrollEvent();
       this.hideShowNoResponseFields();
@@ -650,12 +650,7 @@
 }).call(this);
 
 (function() {
-  Formbuilder.registerField('address', {
-    order: 50,
-    view: "<div class='input-line'>\n  <span class='street'>\n    <input type='text' />\n    <label>Address</label>\n  </span>\n</div>\n\n<div class='input-line'>\n  <span class='city'>\n    <input type='text' />\n    <label>City</label>\n  </span>\n\n  <span class='state'>\n    <input type='text' />\n    <label>State / Province / Region</label>\n  </span>\n</div>\n\n<div class='input-line'>\n  <span class='zip'>\n    <input type='text' />\n    <label>Zipcode</label>\n  </span>\n\n  <span class='country'>\n    <select><option>United States</option></select>\n    <label>Country</label>\n  </span>\n</div>",
-    edit: "",
-    addButton: "<span class=\"symbol\"><span class=\"fa fa-home\"></span></span> Address"
-  });
+
 
 }).call(this);
 
@@ -686,12 +681,7 @@
 }).call(this);
 
 (function() {
-  Formbuilder.registerField('date', {
-    order: 20,
-    view: "<div class='input-line'>\n  <span class='month'>\n    <input type=\"text\" />\n    <label>MM</label>\n  </span>\n\n  <span class='above-line'>/</span>\n\n  <span class='day'>\n    <input type=\"text\" />\n    <label>DD</label>\n  </span>\n\n  <span class='above-line'>/</span>\n\n  <span class='year'>\n    <input type=\"text\" />\n    <label>YYYY</label>\n  </span>\n</div>",
-    edit: "",
-    addButton: "<span class=\"symbol\"><span class=\"fa fa-calendar\"></span></span> Date"
-  });
+
 
 }).call(this);
 
@@ -822,7 +812,7 @@
 (function() {
   Formbuilder.registerField('section_start', {
     order: 99,
-    view: "",
+    view: "<div class='section_start'>{</div>",
     type: 'non_input',
     edit: "",
     addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Start"
@@ -845,22 +835,12 @@
 }).call(this);
 
 (function() {
-  Formbuilder.registerField('time', {
-    order: 25,
-    view: "<div class='input-line'>\n  <span class='hours'>\n    <input type=\"text\" />\n    <label>HH</label>\n  </span>\n\n  <span class='above-line'>:</span>\n\n  <span class='minutes'>\n    <input type=\"text\" />\n    <label>MM</label>\n  </span>\n\n  <span class='above-line'>:</span>\n\n  <span class='seconds'>\n    <input type=\"text\" />\n    <label>SS</label>\n  </span>\n\n  <span class='am_pm'>\n    <select>\n      <option>AM</option>\n      <option>PM</option>\n    </select>\n  </span>\n</div>",
-    edit: "",
-    addButton: "<span class=\"symbol\"><span class=\"fa fa-clock-o\"></span></span> Time"
-  });
+
 
 }).call(this);
 
 (function() {
-  Formbuilder.registerField('website', {
-    order: 35,
-    view: "<input type='text' placeholder='http://' />",
-    edit: "",
-    addButton: "<span class=\"symbol\"><span class=\"fa fa-link\"></span></span> Website"
-  });
+
 
 }).call(this);
 
@@ -1085,9 +1065,9 @@ with (obj) {
 __p +=
 ((__t = ( Formbuilder.templates['partials/save_button']() )) == null ? '' : __t) +
 '\r\n' +
-((__t = ( Formbuilder.templates['partials/left_side']() )) == null ? '' : __t) +
+((__t = ( Formbuilder.templates['partials/menu_side']() )) == null ? '' : __t) +
 '\r\n' +
-((__t = ( Formbuilder.templates['partials/right_side']() )) == null ? '' : __t) +
+((__t = ( Formbuilder.templates['partials/content_side']() )) == null ? '' : __t) +
 '\r\n<div class=\'fb-clear\'></div>';
 
 }
@@ -1125,6 +1105,16 @@ __p += '\r\n    </div>\r\n  </div>\r\n</div>\r\n';
 return __p
 };
 
+this["Formbuilder"]["templates"]["partials/content_side"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class=\'fb-form\'>\r\n  <div class=\'fb-no-response-fields\'>No response fields</div>\r\n  <div class=\'fb-response-fields\'></div>\r\n</div>\r\n';
+
+}
+return __p
+};
+
 this["Formbuilder"]["templates"]["partials/edit_field"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -1135,25 +1125,15 @@ __p += '<div class=\'fb-tab-pane\' id=\'editField\'>\r\n  <div class=\'fb-edit-f
 return __p
 };
 
-this["Formbuilder"]["templates"]["partials/left_side"] = function(obj) {
+this["Formbuilder"]["templates"]["partials/menu_side"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'fb-left\'>\r\n  <ul class=\'fb-tabs\'>\r\n    <li class=\'active\'><a data-target=\'#addField\'>Add new field</a></li>\r\n    <li><a data-target=\'#editField\'>Edit field</a></li>\r\n  </ul>\r\n\r\n  <div class=\'fb-tab-content\'>\r\n    ' +
+__p += '<div class=\'fb-menu\'>\r\n  <ul class=\'fb-tabs\'>\r\n    <li class=\'active\'><a data-target=\'#addField\'>Add new field</a></li>\r\n    <li><a data-target=\'#editField\'>Edit field</a></li>\r\n  </ul>\r\n\r\n  <div class=\'fb-tab-content\'>\r\n    ' +
 ((__t = ( Formbuilder.templates['partials/add_field']() )) == null ? '' : __t) +
 '\r\n    ' +
 ((__t = ( Formbuilder.templates['partials/edit_field']() )) == null ? '' : __t) +
 '\r\n  </div>\r\n</div>';
-
-}
-return __p
-};
-
-this["Formbuilder"]["templates"]["partials/right_side"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class=\'fb-right\'>\r\n  <div class=\'fb-no-response-fields\'>No response fields</div>\r\n  <div class=\'fb-response-fields\'></div>\r\n</div>\r\n';
 
 }
 return __p

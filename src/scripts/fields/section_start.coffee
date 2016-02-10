@@ -2,7 +2,9 @@ Formbuilder.registerField 'section_start',
 
   order: 99
 
-  view: ""
+  view: """
+    <div class='section_start'>{</div>
+  """
 
   type: 'non_input'
 
