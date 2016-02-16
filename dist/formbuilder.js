@@ -482,14 +482,10 @@
     };
 
     BuilderView.prototype.scrollLeftWrapper = function($responseFieldEl) {
-      var _this = this;
       this.unlockLeftWrapper();
       if (!$responseFieldEl[0]) {
-        return;
+
       }
-      return $.scrollWindowTo((this.$el.offset().top + $responseFieldEl.offset().top) - this.$responseFields.offset().top, 200, function() {
-        return _this.lockLeftWrapper();
-      });
     };
 
     BuilderView.prototype.lockLeftWrapper = function() {

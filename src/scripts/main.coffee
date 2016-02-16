@@ -315,8 +315,8 @@ class BuilderView extends Backbone.View
   scrollLeftWrapper: ($responseFieldEl) ->
     @unlockLeftWrapper()
     return unless $responseFieldEl[0]
-    $.scrollWindowTo ((@$el.offset().top + $responseFieldEl.offset().top) - @$responseFields.offset().top), 200, =>
-      @lockLeftWrapper()
+#    $.scrollWindowTo ((@$el.offset().top + $responseFieldEl.offset().top) - @$responseFields.offset().top), 200, =>
+#      @lockLeftWrapper()
 
   lockLeftWrapper: ->
     @$fbLeft.data('locked', true)
