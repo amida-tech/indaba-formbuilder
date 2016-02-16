@@ -41,7 +41,7 @@
 .fb-field-wrapper .input-line > span{display:inline-block;vertical-align:top}
 .fb-field-wrapper .input-line > span input{width:100%}
 .fb-field-wrapper .input-line > span > label{display:block;font-size:13px;margin-left:3px}
-.fb-field-wrapper .help-block{display:block;font-size:12px;margin-top:5px}
+.fb-field-wrapper .help-block{display:block;font-size:12px;margin-top:5px;margin-bottom:10px}
 .fb-edit-field-wrapper{font-size:13px}
 .fb-edit-field-wrapper .fb-field-label{font-weight:normal;background:#eee;padding:.75em;color:#666;font-size:1.25em}
 .fb-edit-field-wrapper .fb-field-label .field-type{margin-top:.5em;display:block;font-family:'Source Sans Pro',sans-serif;font-size:1em}

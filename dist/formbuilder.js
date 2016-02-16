@@ -584,6 +584,7 @@
         ADMIN_ONLY: 'admin_only',
         OPTIONS: 'field_options.options',
         SKIP: 'field_options.skip',
+        QID: 'field_options.qid',
         DESCRIPTION: 'field_options.description',
         INCLUDE_OTHER: 'field_options.include_other_option',
         INCLUDE_BLANK: 'field_options.include_blank_option',
@@ -911,8 +912,10 @@ this["Formbuilder"]["templates"]["edit/common"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'fb-edit-section-header\'>Label</div>\r\n\r\n<div class=\'fb-common-wrapper\'>\r\n    <div class=\'fb-label-description\'>\r\n        ' +
+__p += '<div class=\'fb-edit-section-header\'>Question</div>\r\n\r\n<div class=\'fb-common-wrapper\'>\r\n    <div class=\'fb-label-description\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
+'\r\n    </div>\r\n    <div class=\'fb-label-qid\'>\r\n        ' +
+((__t = ( Formbuilder.templates['edit/label_qid']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-label-skip\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/label_skip']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-common-checkboxes\'>\r\n        ' +
@@ -956,6 +959,18 @@ __p += '<input type=\'text\' data-rv-input=\'model.' +
 '\' />\r\n<textarea data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.DESCRIPTION )) == null ? '' : __t) +
 '\'\r\n          placeholder=\'Add a longer description to this field\'></textarea>';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["edit/label_qid"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<label>\r\n    Question id:\r\n    <input type=\'text\' data-rv-input=\'model.' +
+((__t = ( Formbuilder.options.mappings.QID )) == null ? '' : __t) +
+'\' />\r\n</label>\r\n';
 
 }
 return __p
@@ -1155,13 +1170,13 @@ this["Formbuilder"]["templates"]["view/base"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'subtemplate-wrapper\'>\r\n  <div class=\'cover\'></div>\r\n  ' +
+__p += '<div class=\'subtemplate-wrapper\'>\r\n    <div class=\'cover\'></div>\r\n    ' +
 ((__t = ( Formbuilder.templates['view/label']({rf: rf}) )) == null ? '' : __t) +
-'\r\n\r\n  ' +
-((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
-'\r\n\r\n  ' +
+'\r\n    ' +
 ((__t = ( Formbuilder.templates['view/description']({rf: rf}) )) == null ? '' : __t) +
-'\r\n  ' +
+'\r\n\r\n    ' +
+((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
+'\r\n\r\n    ' +
 ((__t = ( Formbuilder.templates['view/duplicate_remove']({rf: rf}) )) == null ? '' : __t) +
 '\r\n</div>\r\n';
 

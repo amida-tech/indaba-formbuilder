@@ -385,6 +385,7 @@ class Formbuilder
       ADMIN_ONLY: 'admin_only'
       OPTIONS: 'field_options.options'
       SKIP: 'field_options.skip'
+      QID: 'field_options.qid'
       DESCRIPTION: 'field_options.description'
       INCLUDE_OTHER: 'field_options.include_other_option'
       INCLUDE_BLANK: 'field_options.include_blank_option'
