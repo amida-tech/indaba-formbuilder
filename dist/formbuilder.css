@@ -14,7 +14,7 @@
 .fb-tab-content .fb-tab-pane.active{display:block}
 .fb-add-field-types .section{padding-bottom:5px;margin-bottom:20px}
 .fb-add-field-types{font-size:0}
-.fb-add-field-types a{font-size:13px;display:inline-block;width:48.5%;background-color:#1abc9c;margin-bottom:9px;box-sizing:border-box}
+.fb-add-field-types a{background:#fff;color:#7abc55;border-radius:4px;border:1px solid #7abc55;font-weight:bold;font-size:13px;display:inline-block;width:48.5%;margin-bottom:9px;box-sizing:border-box}
 .fb-add-field-types a:nth-child(odd){margin-right:3%}
 .fb-add-field-types a .symbol{opacity:.6;margin:0 .25em 0 -1em}
 .fb-response-fields{padding-bottom:150px}
