@@ -916,9 +916,9 @@ __p += '<div class=\'fb-edit-section-header\'>Question</div>\r\n\r\n<div class=\
 ((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-label-qid\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/label_qid']() )) == null ? '' : __t) +
-'\r\n    </div>\r\n    <div class=\'fb-label-skip\'>\r\n        ' +
+'\r\n    </div>\r\n    <!--<div class=\'fb-label-skip\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/label_skip']() )) == null ? '' : __t) +
-'\r\n    </div>\r\n    <div class=\'fb-common-checkboxes\'>\r\n        ' +
+'\r\n    </div>-->\r\n    <div class=\'fb-common-checkboxes\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/checkboxes']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-clear\'></div>\r\n</div>\r\n';
 
@@ -1035,7 +1035,7 @@ __p += '\r\n\r\n<div class=\'option\' data-rv-each-option=\'model.' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
 '" title="Add Option"><i class=\'fa fa-plus-circle\'></i></a>\r\n    <a class="js-remove-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-'" title="Remove Option"><i class=\'fa fa-minus-circle\'></i></a>\r\n    <label>\r\n        Text:\r\n        <input type="text" class="option-label-input" data-rv-input="option:label" />\r\n    </label>\r\n    <label>\r\n        Value:\r\n        <input type="text" class="option-value-input" data-rv-input="option:value" />\r\n    </label>\r\n    <label>\r\n        Skip:\r\n        <input type="text" class="option-skip-input" data-rv-input="option:skip" />\r\n    </label>\r\n</div>\r\n\r\n';
+'" title="Remove Option"><i class=\'fa fa-minus-circle\'></i></a>\r\n    <label>\r\n        Text:\r\n        <input type="text" class="option-label-input" data-rv-input="option:label" />\r\n    </label>\r\n    <label>\r\n        Value:\r\n        <input type="text" class="option-value-input" data-rv-input="option:value" />\r\n    </label>\r\n    <!--<label>\r\n        Skip:\r\n        <input type="text" class="option-skip-input" data-rv-input="option:skip" />\r\n    </label>-->\r\n</div>\r\n\r\n';
  if (typeof includeOther !== 'undefined'){ ;
 __p += '\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
