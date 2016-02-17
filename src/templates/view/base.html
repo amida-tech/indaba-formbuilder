@@ -2,6 +2,7 @@
     <div class='cover'></div>
     <%= Formbuilder.templates['view/label']({rf: rf}) %>
     <%= Formbuilder.templates['view/description']({rf: rf}) %>
+    <%= Formbuilder.templates['view/links']({rf: rf}) %>
 
     <%= Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) %>
 

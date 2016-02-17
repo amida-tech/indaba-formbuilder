@@ -78,6 +78,10 @@ class EditFieldView extends Backbone.View
     'click .js-default-updated': 'defaultUpdated'
     'input .fb-option-label-input': 'forceRender'
     'input .fb-option-value-input': 'forceRender'
+    'click .js-add-link': 'addLink'
+    'click .js-remove-link': 'removeLink'
+    'input .fb-link-label-input': 'forceRender'
+    'input .fb-link-url-input': 'forceRender'
 
   initialize: (options) ->
     {@parentView} = options
@@ -96,9 +100,9 @@ class EditFieldView extends Backbone.View
   # @todo this should really be on the model, not the view
   addOption: (e) ->
     $el = $(e.currentTarget)
-    i = @$el.find('.option').index($el.closest('.option'))
+    i = @$el.find('.fb-edit-option').index($el.closest('.fb-edit-option'))
     options = @model.get(Formbuilder.options.mappings.OPTIONS) || []
-    newOption = {label: "", checked: false, value: "", skip: ""}
+    newOption = {label: '', checked: false, value: ''}
 
     if i > -1
       options.splice(i + 1, 0, newOption)
@@ -108,6 +112,21 @@ class EditFieldView extends Backbone.View
     @model.set Formbuilder.options.mappings.OPTIONS, options
     @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
     @forceRender()
+    
+  addLink: (e) ->
+    $el = $(e.currentTarget)
+    i = @$el.find('.fb-edit-link').index($el.closest('.fb-edit-link'))
+    links = @model.get(Formbuilder.options.mappings.LINKS) || []
+    newLink = {label: '', url: ''}
+
+    if i > -1
+      links.splice(i + 1, 0, newLink)
+    else
+      links.push newLink
+
+    @model.set Formbuilder.options.mappings.LINKS, links
+    @model.trigger "change:#{Formbuilder.options.mappings.LINKS}"
+    @forceRender()
 
   removeOption: (e) ->
     $el = $(e.currentTarget)
@@ -116,6 +135,15 @@ class EditFieldView extends Backbone.View
     options.splice index, 1
     @model.set Formbuilder.options.mappings.OPTIONS, options
     @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
+    @forceRender()
+
+  removeLink: (e) ->
+    $el = $(e.currentTarget)
+    index = @$el.find(".js-remove-link").index($el)
+    links = @model.get Formbuilder.options.mappings.LINKS
+    links.splice index, 1
+    @model.set Formbuilder.options.mappings.LINKS, links
+    @model.trigger "change:#{Formbuilder.options.mappings.LINKS}"
     @forceRender()
 
   defaultUpdated: (e) ->
@@ -364,6 +392,7 @@ class Formbuilder
       attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type
       attrs[Formbuilder.options.mappings.REQUIRED] = true
       attrs['field_options'] = {}
+      attrs['field_options']['links'] = []
       Formbuilder.fields[field_type].defaultAttributes?(attrs) || attrs
 
     simple_format: (x) ->
@@ -383,9 +412,9 @@ class Formbuilder
       FIELD_TYPE: 'field_type'
       REQUIRED: 'required'
       ATTACHMENT: 'attachment'
-      ADMIN_ONLY: 'admin_only'
+      ADMIN_ONLY: 'admin_only'      
       OPTIONS: 'field_options.options'
-      SKIP: 'field_options.skip'      
+      LINKS: 'field_options.links'
       VALUE: 'field_options.value'
       QID: 'field_options.qid'
       DESCRIPTION: 'field_options.description'

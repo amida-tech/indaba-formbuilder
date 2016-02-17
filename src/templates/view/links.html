@@ -1,0 +1,18 @@
+<% if ((rf.get(Formbuilder.options.mappings.LINKS) || []).length > 0) { %>
+<div class="fb-links">
+    <div class="fb-links-title">Links:</div>
+    <ul>
+        <% for (i in (rf.get(Formbuilder.options.mappings.LINKS) || [])) { %>
+        <li>
+            <% if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { %>
+            <a href="<%= rf.get(Formbuilder.options.mappings.LINKS)[i].url %>" onclick="javascript: return false;">
+            <% } %>
+                <%= rf.get(Formbuilder.options.mappings.LINKS)[i].label %>
+            <% if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { %>
+            </a>
+            <% } %>
+        </li>
+        <% } %>
+    </ul>
+</div>
+<% } %>

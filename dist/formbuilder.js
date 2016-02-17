@@ -183,7 +183,11 @@
       'click .js-remove-option': 'removeOption',
       'click .js-default-updated': 'defaultUpdated',
       'input .fb-option-label-input': 'forceRender',
-      'input .fb-option-value-input': 'forceRender'
+      'input .fb-option-value-input': 'forceRender',
+      'click .js-add-link': 'addLink',
+      'click .js-remove-link': 'removeLink',
+      'input .fb-link-label-input': 'forceRender',
+      'input .fb-link-url-input': 'forceRender'
     };
 
     EditFieldView.prototype.initialize = function(options) {
@@ -210,13 +214,12 @@
     EditFieldView.prototype.addOption = function(e) {
       var $el, i, newOption, options;
       $el = $(e.currentTarget);
-      i = this.$el.find('.option').index($el.closest('.option'));
+      i = this.$el.find('.fb-edit-option').index($el.closest('.fb-edit-option'));
       options = this.model.get(Formbuilder.options.mappings.OPTIONS) || [];
       newOption = {
-        label: "",
+        label: '',
         checked: false,
-        value: "",
-        skip: ""
+        value: ''
       };
       if (i > -1) {
         options.splice(i + 1, 0, newOption);
@@ -228,6 +231,25 @@
       return this.forceRender();
     };
 
+    EditFieldView.prototype.addLink = function(e) {
+      var $el, i, links, newLink;
+      $el = $(e.currentTarget);
+      i = this.$el.find('.fb-edit-link').index($el.closest('.fb-edit-link'));
+      links = this.model.get(Formbuilder.options.mappings.LINKS) || [];
+      newLink = {
+        label: '',
+        url: ''
+      };
+      if (i > -1) {
+        links.splice(i + 1, 0, newLink);
+      } else {
+        links.push(newLink);
+      }
+      this.model.set(Formbuilder.options.mappings.LINKS, links);
+      this.model.trigger("change:" + Formbuilder.options.mappings.LINKS);
+      return this.forceRender();
+    };
+
     EditFieldView.prototype.removeOption = function(e) {
       var $el, index, options;
       $el = $(e.currentTarget);
@@ -236,6 +258,17 @@
       options.splice(index, 1);
       this.model.set(Formbuilder.options.mappings.OPTIONS, options);
       this.model.trigger("change:" + Formbuilder.options.mappings.OPTIONS);
+      return this.forceRender();
+    };
+
+    EditFieldView.prototype.removeLink = function(e) {
+      var $el, index, links;
+      $el = $(e.currentTarget);
+      index = this.$el.find(".js-remove-link").index($el);
+      links = this.model.get(Formbuilder.options.mappings.LINKS);
+      links.splice(index, 1);
+      this.model.set(Formbuilder.options.mappings.LINKS, links);
+      this.model.trigger("change:" + Formbuilder.options.mappings.LINKS);
       return this.forceRender();
     };
 
@@ -557,6 +590,7 @@
         attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type;
         attrs[Formbuilder.options.mappings.REQUIRED] = true;
         attrs['field_options'] = {};
+        attrs['field_options']['links'] = [];
         return (typeof (_base = Formbuilder.fields[field_type]).defaultAttributes === "function" ? _base.defaultAttributes(attrs) : void 0) || attrs;
       },
       simple_format: function(x) {
@@ -579,7 +613,7 @@
         ATTACHMENT: 'attachment',
         ADMIN_ONLY: 'admin_only',
         OPTIONS: 'field_options.options',
-        SKIP: 'field_options.skip',
+        LINKS: 'field_options.links',
         VALUE: 'field_options.value',
         QID: 'field_options.qid',
         DESCRIPTION: 'field_options.description',
@@ -838,6 +872,8 @@ __p +=
 '\r\n' +
 ((__t = ( Formbuilder.templates['edit/common']() )) == null ? '' : __t) +
 '\r\n' +
+((__t = ( Formbuilder.templates['edit/links']() )) == null ? '' : __t) +
+'\r\n' +
 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t) +
 '\r\n';
 
@@ -897,9 +933,7 @@ __p += '<div class=\'fb-edit-section-header\'>Question</div>\r\n\r\n<div class=\
 ((__t = ( Formbuilder.templates['edit/label_qid']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-label-label\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/label_value']() )) == null ? '' : __t) +
-'\r\n    </div>\r\n    <!--<div class=\'fb-label-skip\'>\r\n        ' +
-((__t = ( Formbuilder.templates['edit/label_skip']() )) == null ? '' : __t) +
-'\r\n    </div>-->\r\n    <div class=\'fb-common-checkboxes\'>\r\n        ' +
+'\r\n    </div>\r\n    <div class=\'fb-common-checkboxes\'>\r\n        ' +
 ((__t = ( Formbuilder.templates['edit/checkboxes']() )) == null ? '' : __t) +
 '\r\n    </div>\r\n    <div class=\'fb-clear\'></div>\r\n</div>\r\n';
 
@@ -957,18 +991,6 @@ __p += '<label>\r\n    <input type=\'text\' data-rv-input=\'model.' +
 return __p
 };
 
-this["Formbuilder"]["templates"]["edit/label_skip"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<label>\r\n    <input type=\'text\' data-rv-input=\'model.' +
-((__t = ( Formbuilder.options.mappings.SKIP )) == null ? '' : __t) +
-'\' class="fb-large-input" placeholder="Skip" />\r\n</label>\r\n';
-
-}
-return __p
-};
-
 this["Formbuilder"]["templates"]["edit/label_value"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -976,6 +998,24 @@ with (obj) {
 __p += '<label>\r\n    <input type=\'text\' data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.VALUE )) == null ? '' : __t) +
 '\' class="fb-large-input" placeholder="Value" />\r\n</label>\r\n';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["edit/links"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class=\'fb-edit-section-header\'>Links</div>\r\n\r\n<div class=\'fb-edit-link\' data-rv-each-option=\'model.' +
+((__t = ( Formbuilder.options.mappings.LINKS )) == null ? '' : __t) +
+'\'>\r\n    <input type="text" class="fb-link-label-input" data-rv-input="option:label" placeholder="Label"\r\n    /><input type="text" class="fb-link-url-input" data-rv-input="option:url" placeholder="Url"\r\n    /><a class="js-add-link ' +
+((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+'" title="Add Link"><i class=\'fa fa-plus\'></i>\r\n    </a><a class="js-remove-link ' +
+((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+'" title="Remove Link"><i class=\'fa fa-trash\'></i></a>\r\n</div>\r\n\r\n<div class=\'fb-bottom-add\'>\r\n    <a class="js-add-link ' +
+((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+'">Add link</a>\r\n</div>\r\n';
 
 }
 return __p
@@ -1026,9 +1066,9 @@ __p += '\r\n\r\n<div class=\'fb-edit-option\' data-rv-each-option=\'model.' +
 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) +
 '\'>\r\n    <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" \r\n    /><input type="text" class="fb-option-label-input" data-rv-input="option:label" placeholder="Label"\r\n    /><input type="text" class="fb-option-value-input" data-rv-input="option:value" placeholder="Value"\r\n    /><a class="js-add-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-'" title="Add Option"><i class=\'fa fa-plus-circle\'></i>\r\n    </a><a class="js-remove-option ' +
+'" title="Add Option"><i class=\'fa fa-plus\'></i>\r\n    </a><a class="js-remove-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-'" title="Remove Option"><i class=\'fa fa-minus-circle\'></i></a>\r\n</div>\r\n\r\n';
+'" title="Remove Option"><i class=\'fa fa-trash\'></i></a>\r\n</div>\r\n\r\n';
  if (typeof includeOther !== 'undefined'){ ;
 __p += '\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
@@ -1167,6 +1207,8 @@ __p += '<div class=\'subtemplate-wrapper\'>\r\n    <div class=\'cover\'></div>\r
 ((__t = ( Formbuilder.templates['view/label']({rf: rf}) )) == null ? '' : __t) +
 '\r\n    ' +
 ((__t = ( Formbuilder.templates['view/description']({rf: rf}) )) == null ? '' : __t) +
+'\r\n    ' +
+((__t = ( Formbuilder.templates['view/links']({rf: rf}) )) == null ? '' : __t) +
 '\r\n\r\n    ' +
 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
 '\r\n\r\n    ' +
@@ -1209,9 +1251,9 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div class=\'actions-wrapper\'>\r\n  <a class="js-duplicate ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-'" title="Duplicate Field"><i class=\'fa fa-plus-circle\'></i></a>\r\n  <a class="js-clear ' +
+'" title="Duplicate Field"><i class=\'fa fa-plus\'></i></a>\r\n  <a class="js-clear ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-'" title="Remove Field"><i class=\'fa fa-minus-circle\'></i></a>\r\n</div>';
+'" title="Remove Field"><i class=\'fa fa-trash\'></i></a>\r\n</div>';
 
 }
 return __p
@@ -1241,6 +1283,37 @@ with (obj) {
 __p += '<label>\r\n  <span>' +
 ((__t = ( Formbuilder.helpers.simple_format(rf.get(Formbuilder.options.mappings.LABEL)) )) == null ? '' : __t) +
 '\r\n</label>\r\n';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["view/links"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+
+ if ((rf.get(Formbuilder.options.mappings.LINKS) || []).length > 0) { ;
+__p += '\r\n<div class="fb-links">\r\n    <div class="fb-links-title">Links:</div>\r\n    <ul>\r\n        ';
+ for (i in (rf.get(Formbuilder.options.mappings.LINKS) || [])) { ;
+__p += '\r\n        <li>\r\n            ';
+ if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { ;
+__p += '\r\n            <a href="' +
+((__t = ( rf.get(Formbuilder.options.mappings.LINKS)[i].url )) == null ? '' : __t) +
+'" onclick="javascript: return false;">\r\n            ';
+ } ;
+__p += '\r\n                ' +
+((__t = ( rf.get(Formbuilder.options.mappings.LINKS)[i].label )) == null ? '' : __t) +
+'\r\n            ';
+ if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { ;
+__p += '\r\n            </a>\r\n            ';
+ } ;
+__p += '\r\n        </li>\r\n        ';
+ } ;
+__p += '\r\n    </ul>\r\n</div>\r\n';
+ } ;
+
 
 }
 return __p

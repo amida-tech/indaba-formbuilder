@@ -192,15 +192,24 @@ $editing-border = darken($editing-bg, 7%)
 .fb-field-wrapper .actions-wrapper {
   display: none;
   position: absolute;
-  bottom: -7px;
+  bottom: -13px;
   right: 5px;
   z-index: 3;
 }
 
 .fb-field-wrapper .actions-wrapper a {
-  display: inline-block;
-  background-color: #ccc;
-  padding: 2px 8px;
+  border: 1px solid #7abc55;
+  vertical-aling: middle;
+  background-color: #7abc55;
+  padding: 3px 6px;
+}
+
+.fb-field-wrapper .actions-wrapper a.js-clear {
+  background-color: transparent
+}
+
+.fb-field-wrapper .actions-wrapper a.js-clear {
+  color: #7abc55;
 }
 
 .edit-response-field {
@@ -223,17 +232,6 @@ $editing-border = darken($editing-bg, 7%)
   }
 }
 
-.fb-field-wrapper .actions-wrapper a.js-duplicate,
-.fb-edit-field-wrapper .js-add-option {
-  background-color: $affirmitive-color;
-  border: none;
-}
-
-.fb-field-wrapper .actions-wrapper a.js-clear,
-.fb-edit-field-wrapper .js-remove-option {
-  background-color: $negative-color;
-  border: none;
-}
 
 .fb-field-wrapper .subtemplate-wrapper {
   border: 1px dashed transparent;
@@ -329,9 +327,21 @@ $editing-border = darken($editing-bg, 7%)
   font-weight: 700;
 }
 
-.fb-edit-field-wrapper .js-add-option,.fb-edit-field-wrapper .js-remove-option {
+.fb-edit-field-wrapper .js-add-option,.fb-edit-field-wrapper .js-remove-option, .fb-edit-field-wrapper .js-add-link,.fb-edit-field-wrapper .js-remove-link {
+  border: 1px solid #7abc55;
+  vertical-aling: middle;
+  background-color: transparent;
   padding: 3px 6px;
 }
+
+.fb-edit-field-wrapper .js-add-option.fb-button, .fb-edit-field-wrapper .js-add-link.fb-button {
+  background-color: #7abc55;
+}
+
+.fb-edit-field-wrapper .js-remove-option  .fa, .fb-edit-field-wrapper .js-remove-link  .fa {
+  color: #7abc55;
+  display: inline-block;
+} 
 
 .fb-edit-field-wrapper .fb-bottom-add {
   margin-top: 8px;
@@ -417,7 +427,12 @@ $editing-border = darken($editing-bg, 7%)
 }
 
 .fb-edit-option .fb-option-label-input {
-	width: 120px;
+	width: 115px;
+	margin-right: 4px;
+}
+
+.fb-edit-link .fb-link-label-input, .fb-edit-link .fb-link-url-input {
+	width: 103px;
 	margin-right: 4px;
 }
 
@@ -426,8 +441,23 @@ $editing-border = darken($editing-bg, 7%)
 	margin-right: 4px;
 }
 
-.fb-edit-option .js-add-option {
+.fb-edit-option .js-add-option, .fb-edit-link .js-add-link {
 	margin-right: 4px;
+}
+
+.fa-trash:before{content:"X"}
+
+.fb-links {
+	margin-top: 10px;
+	font-size: 10px;
+}
+
+.fb-links .fb-links-title {
+	font-size: 12px;
+	font-weight: bold;
+	border-bottom: thin solid #eee;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
 }
 
 .response-field-website input {
