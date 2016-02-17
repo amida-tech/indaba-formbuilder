@@ -868,8 +868,6 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
-((__t = ( Formbuilder.templates['edit/base_header']() )) == null ? '' : __t) +
-'\r\n' +
 ((__t = ( Formbuilder.templates['edit/common']() )) == null ? '' : __t) +
 '\r\n' +
 ((__t = ( Formbuilder.templates['edit/links']() )) == null ? '' : __t) +
