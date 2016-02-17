@@ -1024,7 +1024,7 @@ __p += '\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
  } ;
 __p += '\r\n\r\n<div class=\'fb-edit-option\' data-rv-each-option=\'model.' +
 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) +
-'\'>\r\n    <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" \r\n    /><input type="text" class="fb-option-label-input" data-rv-input="option:label" \r\n    /><input type="text" class="fb-option-value-input" data-rv-input="option:value" \r\n    /><a class="js-add-option ' +
+'\'>\r\n    <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" \r\n    /><input type="text" class="fb-option-label-input" data-rv-input="option:label" placeholder="Label"\r\n    /><input type="text" class="fb-option-value-input" data-rv-input="option:value" placeholder="Value"\r\n    /><a class="js-add-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
 '" title="Add Option"><i class=\'fa fa-plus-circle\'></i>\r\n    </a><a class="js-remove-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
