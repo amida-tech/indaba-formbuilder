@@ -21,20 +21,18 @@ Formbuilder.registerField 'dropdown',
   """
 
   addButton: """
-    <span class="symbol"><span class="fa fa-caret-down"></span></span> Dropdown
+    <span class='symbol'><span class='fa fa-caret-down'></span></span> Dropdown
   """
 
   defaultAttributes: (attrs) ->
     attrs.field_options.options = [
       label: "",
       checked: false,
-      value: "",
-      skip: ""
+      value: ""
     ,
       label: "",
       checked: false,
-      value: "",
-      skip: ""
+      value: ""
     ]
 
     attrs.field_options.include_blank_option = false

@@ -29,20 +29,18 @@ Formbuilder.registerField 'checkboxes',
   """
 
   addButton: """
-    <span class="symbol"><span class="fa fa-square-o"></span></span> Checkboxes
+    <span class='symbol'><span class='fa fa-square-o'></span></span> Checkboxes
   """
 
   defaultAttributes: (attrs) ->
     attrs.field_options.options = [
       label: "",
       checked: false,
-      value: "",
-      skip: ""
+      value: ""
     ,
       label: "",
       checked: false,
-      value: "",
-      skip: ""
+      value: ""
     ]
 
     attrs

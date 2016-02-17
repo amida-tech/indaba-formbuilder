@@ -211,6 +211,7 @@ $editing-border = darken($editing-bg, 7%)
     display: inline-block;
     height: auto;
     vertical-align: middle;
+    margin-bottom: 3px;
 
     &:focus {
       outline: none;
@@ -336,12 +337,8 @@ $editing-border = darken($editing-bg, 7%)
   margin-top: 8px;
 }
 
-.fb-common-wrapper .fb-label-description {
-  margin-bottom: 10px;
-}
-
-.fb-common-wrapper .fb-label-description input,.fb-common-wrapper .fb-label-description textarea {
-  width: 100%;
+.fb-large-input {
+	width: 100%;
 }
 
 .fb-common-wrapper .fb-label-description textarea {
@@ -405,15 +402,32 @@ $editing-border = darken($editing-bg, 7%)
   display: inline-block;
 }
 
-
-.fb-common-checkboxes label {
-  display: block;
-  margin: 5px 0;
+.fb-edit-option {
+	margin-bottom: 3px;
 }
 
-.option label {
-  display: block;
-  margin: 5px 0;
+.fb-edit-option input {
+	margin: 0;
+	vertical-align: top;
+	display: inline-block;
+}
+
+.fb-edit-option input[type="checkbox"] {
+	margin: 6px 4px 0;
+}
+
+.fb-edit-option .fb-option-label-input {
+	width: 120px;
+	margin-right: 4px;
+}
+
+.fb-edit-option .fb-option-value-input {
+	width: 70px;
+	margin-right: 4px;
+}
+
+.fb-edit-option .js-add-option {
+	margin-right: 4px;
 }
 
 .response-field-website input {

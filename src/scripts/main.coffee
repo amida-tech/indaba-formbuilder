@@ -34,6 +34,7 @@ class ViewFieldView extends Backbone.View
     @listenTo @model, "destroy", @remove
 
   render: ->
+    #TODO: problem on option checked change (1 step back)
     @$el.addClass('response-field-' + @model.get(Formbuilder.options.mappings.FIELD_TYPE))
         .data('cid', @model.cid)
         .html(Formbuilder.templates["view/base#{if !@model.is_input() then '_non_input' else ''}"]({rf: @model}))
@@ -75,9 +76,8 @@ class EditFieldView extends Backbone.View
     'click .js-add-option': 'addOption'
     'click .js-remove-option': 'removeOption'
     'click .js-default-updated': 'defaultUpdated'
-    'input .option-label-input': 'forceRender'
-    'input .option-value-input': 'forceRender'
-    'input .option-skip-input': 'forceRender'
+    'input .fb-option-label-input': 'forceRender'
+    'input .fb-option-value-input': 'forceRender'
 
   initialize: (options) ->
     {@parentView} = options
@@ -382,9 +382,11 @@ class Formbuilder
       LABEL: 'label'
       FIELD_TYPE: 'field_type'
       REQUIRED: 'required'
+      ATTACHMENT: 'attachment'
       ADMIN_ONLY: 'admin_only'
       OPTIONS: 'field_options.options'
-      SKIP: 'field_options.skip'
+      SKIP: 'field_options.skip'      
+      VALUE: 'field_options.value'
       QID: 'field_options.qid'
       DESCRIPTION: 'field_options.description'
       INCLUDE_OTHER: 'field_options.include_other_option'
