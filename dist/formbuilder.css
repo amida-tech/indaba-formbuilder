@@ -71,7 +71,7 @@
 .fb-edit-option input{margin:0;vertical-align:top;display:inline-block}
 .fb-edit-option input[type="checkbox"]{margin:6px 4px 0}
 .fb-edit-option .fb-option-label-input{width:115px;margin-right:4px}
-.fb-edit-link .fb-link-label-input,.fb-edit-link .fb-link-url-input{width:103px;margin-right:4px}
+.fb-edit-link .fb-link-label-input,.fb-edit-link .fb-link-url-input{width:217px;margin-right:4px}
 .fb-edit-option .fb-option-value-input{width:70px;margin-right:4px}
 .fb-edit-option .js-add-option,.fb-edit-link .js-add-link{margin-right:4px}
 .fa-trash:before{content:"X"}

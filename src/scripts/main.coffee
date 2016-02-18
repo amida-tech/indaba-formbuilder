@@ -81,7 +81,7 @@ class EditFieldView extends Backbone.View
     'click .js-add-link': 'addLink'
     'click .js-remove-link': 'removeLink'
     'input .fb-link-label-input': 'forceRender'
-    'input .fb-link-url-input': 'forceRender'
+    #'input .fb-link-url-input': 'forceRender'
 
   initialize: (options) ->
     {@parentView} = options
@@ -117,7 +117,7 @@ class EditFieldView extends Backbone.View
     $el = $(e.currentTarget)
     i = @$el.find('.fb-edit-link').index($el.closest('.fb-edit-link'))
     links = @model.get(Formbuilder.options.mappings.LINKS) || []
-    newLink = {label: '', url: ''}
+    newLink = {label: '' } #, url: ''}
 
     if i > -1
       links.splice(i + 1, 0, newLink)

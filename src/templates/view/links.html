@@ -4,11 +4,11 @@
     <ul>
         <% for (i in (rf.get(Formbuilder.options.mappings.LINKS) || [])) { %>
         <li>
-            <% if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { %>
-            <a href="<%= rf.get(Formbuilder.options.mappings.LINKS)[i].url %>" onclick="javascript: return false;">
+            <% if((rf.get(Formbuilder.options.mappings.LINKS)[i].label || '').trim().indexOf('http') === 0) { %>
+            <a href="<%= rf.get(Formbuilder.options.mappings.LINKS)[i].label %>">
             <% } %>
                 <%= rf.get(Formbuilder.options.mappings.LINKS)[i].label %>
-            <% if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { %>
+            <% if((rf.get(Formbuilder.options.mappings.LINKS)[i].label || '').trim().indexOf('http') === 0) { %>
             </a>
             <% } %>
         </li>

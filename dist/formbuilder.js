@@ -186,8 +186,7 @@
       'input .fb-option-value-input': 'forceRender',
       'click .js-add-link': 'addLink',
       'click .js-remove-link': 'removeLink',
-      'input .fb-link-label-input': 'forceRender',
-      'input .fb-link-url-input': 'forceRender'
+      'input .fb-link-label-input': 'forceRender'
     };
 
     EditFieldView.prototype.initialize = function(options) {
@@ -237,8 +236,7 @@
       i = this.$el.find('.fb-edit-link').index($el.closest('.fb-edit-link'));
       links = this.model.get(Formbuilder.options.mappings.LINKS) || [];
       newLink = {
-        label: '',
-        url: ''
+        label: ''
       };
       if (i > -1) {
         links.splice(i + 1, 0, newLink);
@@ -911,9 +909,9 @@ this["Formbuilder"]["templates"]["edit/checkboxes"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<label>\r\n  <input type=\'checkbox\' data-rv-checked=\'model.' +
+__p += '<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.REQUIRED )) == null ? '' : __t) +
-'\' />\r\n  Required\r\n</label>\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
+'\' />\r\n    Required\r\n</label>\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.ATTACHMENT )) == null ? '' : __t) +
 '\' />\r\n    Add attachment\r\n</label>';
 
@@ -981,9 +979,9 @@ this["Formbuilder"]["templates"]["edit/label_qid"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<label>\r\n    <input type=\'text\' data-rv-input=\'model.' +
+__p += '<input type=\'text\' data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.QID )) == null ? '' : __t) +
-'\' placeholder="Question ID" class="fb-large-input" />\r\n</label>\r\n';
+'\' placeholder="Question ID" class="fb-large-input" />\r\n';
 
 }
 return __p
@@ -993,9 +991,9 @@ this["Formbuilder"]["templates"]["edit/label_value"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<label>\r\n    <input type=\'text\' data-rv-input=\'model.' +
+__p += '<input type=\'text\' data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.VALUE )) == null ? '' : __t) +
-'\' class="fb-large-input" placeholder="Value" />\r\n</label>\r\n';
+'\' class="fb-large-input" placeholder="Value" />\r\n';
 
 }
 return __p
@@ -1005,9 +1003,9 @@ this["Formbuilder"]["templates"]["edit/links"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'fb-edit-section-header\'>Links</div>\r\n\r\n<div class=\'fb-edit-link\' data-rv-each-option=\'model.' +
+__p += '<div class=\'fb-edit-section-header\'>References</div>\r\n\r\n<div class=\'fb-edit-link\' data-rv-each-option=\'model.' +
 ((__t = ( Formbuilder.options.mappings.LINKS )) == null ? '' : __t) +
-'\'>\r\n    <input type="text" class="fb-link-label-input" data-rv-input="option:label" placeholder="Label"\r\n    /><input type="text" class="fb-link-url-input" data-rv-input="option:url" placeholder="Url"\r\n    /><a class="js-add-link ' +
+'\'>\r\n    <input type="text" class="fb-link-label-input" data-rv-input="option:label" placeholder="Reference" \r\n    /><!--<input type="text" class="fb-link-url-input" data-rv-input="option:url" placeholder="Url"\r\n    />--><a class="js-add-link ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
 '" title="Add Link"><i class=\'fa fa-plus\'></i>\r\n    </a><a class="js-remove-link ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
@@ -1296,15 +1294,15 @@ with (obj) {
 __p += '\r\n<div class="fb-links">\r\n    <div class="fb-links-title">Links:</div>\r\n    <ul>\r\n        ';
  for (i in (rf.get(Formbuilder.options.mappings.LINKS) || [])) { ;
 __p += '\r\n        <li>\r\n            ';
- if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { ;
+ if((rf.get(Formbuilder.options.mappings.LINKS)[i].label || '').trim().indexOf('http') === 0) { ;
 __p += '\r\n            <a href="' +
-((__t = ( rf.get(Formbuilder.options.mappings.LINKS)[i].url )) == null ? '' : __t) +
-'" onclick="javascript: return false;">\r\n            ';
+((__t = ( rf.get(Formbuilder.options.mappings.LINKS)[i].label )) == null ? '' : __t) +
+'">\r\n            ';
  } ;
 __p += '\r\n                ' +
 ((__t = ( rf.get(Formbuilder.options.mappings.LINKS)[i].label )) == null ? '' : __t) +
 '\r\n            ';
- if(rf.get(Formbuilder.options.mappings.LINKS)[i].url) { ;
+ if((rf.get(Formbuilder.options.mappings.LINKS)[i].label || '').trim().indexOf('http') === 0) { ;
 __p += '\r\n            </a>\r\n            ';
  } ;
 __p += '\r\n        </li>\r\n        ';
