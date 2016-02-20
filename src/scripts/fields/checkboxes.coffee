@@ -1,6 +1,6 @@
 Formbuilder.registerField 'checkboxes',
 
-  order: 10
+  order: 50
 
   view: """
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>

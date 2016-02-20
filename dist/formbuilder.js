@@ -680,13 +680,22 @@
 }).call(this);
 
 (function() {
-
+  Formbuilder.registerField('bullet_points', {
+    order: 30,
+    view: "<input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />\n<div>...</div>\n<input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />",
+    edit: "<%= Formbuilder.templates['edit/size']() %>\n<%= Formbuilder.templates['edit/min_max_length']() %>",
+    addButton: "<span class='symbol'><span class='fa fa-font'></span></span> Bullet Points",
+    defaultAttributes: function(attrs) {
+      attrs.field_options.size = 'small';
+      return attrs;
+    }
+  });
 
 }).call(this);
 
 (function() {
   Formbuilder.registerField('checkboxes', {
-    order: 10,
+    order: 50,
     view: "<% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>\n  <div>\n    <label class='fb-option'>\n      <input type='checkbox' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick=\"javascript: return false;\" />\n      <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>\n    </label>\n  </div>\n<% } %>\n\n<% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>\n  <div class='other-option'>\n    <label class='fb-option'>\n      <input type='checkbox' />\n      Other\n    </label>\n\n    <input type='text' />\n  </div>\n<% } %>",
     edit: "<%= Formbuilder.templates['edit/options']({ includeOther: true }) %>",
     addButton: "<span class='symbol'><span class='fa fa-square-o'></span></span> Checkboxes",
@@ -709,13 +718,18 @@
 }).call(this);
 
 (function() {
-
+  Formbuilder.registerField('date', {
+    order: 70,
+    view: "<div class='fb-date'>\n    <input type=\"text\" />\n    <span class=\"symbol\"><span class=\"fa fa-calendar\"></span></span>\n</div>",
+    edit: "",
+    addButton: "<span class=\"symbol\"><span class=\"fa fa-calendar\"></span></span> Date"
+  });
 
 }).call(this);
 
 (function() {
   Formbuilder.registerField('dropdown', {
-    order: 24,
+    order: 60,
     view: "<select>\n  <% if (rf.get(Formbuilder.options.mappings.INCLUDE_BLANK)) { %>\n    <option value=''></option>\n  <% } %>\n\n  <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>\n    <option <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'selected' %>>\n      <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>\n    </option>\n  <% } %>\n</select>",
     edit: "<%= Formbuilder.templates['edit/options']({ includeBlank: true }) %>",
     addButton: "<span class='symbol'><span class='fa fa-caret-down'></span></span> Dropdown",
@@ -744,13 +758,8 @@
 }).call(this);
 
 (function() {
-
-
-}).call(this);
-
-(function() {
   Formbuilder.registerField('number', {
-    order: 30,
+    order: 80,
     view: "<input type='text' />\n<% if (units = rf.get(Formbuilder.options.mappings.UNITS)) { %>\n  <%= units %>\n<% } %>",
     edit: "<%= Formbuilder.templates['edit/min_max']() %>\n<%= Formbuilder.templates['edit/units']() %>\n<%= Formbuilder.templates['edit/integer_only']() %>",
     addButton: "<span class='symbol'><span class='fa fa-number'>123</span></span> Number"
@@ -760,7 +769,7 @@
 
 (function() {
   Formbuilder.registerField('paragraph', {
-    order: 5,
+    order: 20,
     view: "<textarea class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>'></textarea>",
     edit: "<%= Formbuilder.templates['edit/size']() %>\n<%= Formbuilder.templates['edit/min_max_length']() %>",
     addButton: "<span class='symbol'>&#182;</span> Paragraph",
@@ -773,13 +782,8 @@
 }).call(this);
 
 (function() {
-
-
-}).call(this);
-
-(function() {
   Formbuilder.registerField('radio', {
-    order: 15,
+    order: 40,
     view: "<% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>\n  <div>\n    <label class='fb-option'>\n      <input type='radio' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick=\"javascript: return false;\" />\n      <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>\n    </label>\n  </div>\n<% } %>\n\n<% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>\n  <div class='other-option'>\n    <label class='fb-option'>\n      <input type='radio' />\n      Other\n    </label>\n\n    <input type='text' />\n  </div>\n<% } %>",
     edit: "<%= Formbuilder.templates['edit/options']({ includeOther: true }) %>",
     addButton: "<span class='symbol'><span class='fa fa-circle-o'></span></span> Multiple Choice",
@@ -836,7 +840,7 @@
 
 (function() {
   Formbuilder.registerField('text', {
-    order: 0,
+    order: 10,
     view: "<input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />",
     edit: "<%= Formbuilder.templates['edit/size']() %>\n<%= Formbuilder.templates['edit/min_max_length']() %>",
     addButton: "<span class='symbol'><span class='fa fa-font'></span></span> Text",
@@ -849,12 +853,26 @@
 }).call(this);
 
 (function() {
-
-
-}).call(this);
-
-(function() {
-
+  Formbuilder.registerField('yes_no', {
+    order: 90,
+    view: "<% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>\n  <div>\n    <label class='fb-option'>\n      <input type='radio' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick=\"javascript: return false;\" />\n      <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>\n    </label>\n  </div>\n<% } %>\n\n<% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>\n  <div class='other-option'>\n    <label class='fb-option'>\n      <input type='radio' />\n      Other\n    </label>\n\n    <input type='text' />\n  </div>\n<% } %>",
+    edit: "<%= Formbuilder.templates['edit/options']({ includeOther: true }) %>",
+    addButton: "<span class='symbol'><span class='fa fa-circle-o'></span></span> Yes/No",
+    defaultAttributes: function(attrs) {
+      attrs.field_options.options = [
+        {
+          label: "Yes",
+          checked: false,
+          value: ""
+        }, {
+          label: "No",
+          checked: false,
+          value: ""
+        }
+      ];
+      return attrs;
+    }
+  });
 
 }).call(this);
 

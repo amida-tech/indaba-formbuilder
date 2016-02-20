@@ -1,6 +1,6 @@
 Formbuilder.registerField 'paragraph',
 
-  order: 5
+  order: 20
 
   view: """
     <textarea class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>'></textarea>

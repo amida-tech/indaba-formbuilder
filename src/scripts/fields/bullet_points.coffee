@@ -1,8 +1,10 @@
-Formbuilder.registerField 'text',
+Formbuilder.registerField 'bullet_points',
 
-  order: 10
+  order: 30
 
   view: """
+    <input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />
+    <div>...</div>
     <input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />
   """
 
@@ -12,7 +14,7 @@ Formbuilder.registerField 'text',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-font'></span></span> Text
+    <span class='symbol'><span class='fa fa-font'></span></span> Bullet Points
   """
 
   defaultAttributes: (attrs) ->
