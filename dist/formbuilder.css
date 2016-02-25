@@ -74,7 +74,6 @@
 .fb-edit-link .fb-link-label-input,.fb-edit-link .fb-link-url-input{width:217px;margin-right:4px}
 .fb-edit-option .fb-option-value-input{width:70px;margin-right:4px}
 .fb-edit-option .js-add-option,.fb-edit-link .js-add-link{margin-right:4px}
-.fa-trash:before{content:"X"}
 .fb-links{margin-top:10px;font-size:10px}
 .fb-links .fb-links-title{font-size:12px;font-weight:bold;border-bottom:thin solid #eee;margin-bottom:4px;padding-bottom:2px}
 .response-field-website input{width:200px}
@@ -98,3 +97,4 @@
 .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end,.response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .fb-field-wrapper{margin-left:-160px}
 .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .fb-field-wrapper{margin-left:-80px}
 .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end,.response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .fb-field-wrapper{margin-left:-200px}
+.response-field-scale .fa{margin:0 3px;color:#808080}

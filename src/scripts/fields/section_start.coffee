@@ -17,5 +17,5 @@ Formbuilder.registerField 'section_start',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-minus'></span></span> Section Start
+    <span class='symbol'><span class='fa fa-arrow-right'></span></span> Section Start
   """

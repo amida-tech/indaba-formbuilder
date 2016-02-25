@@ -14,7 +14,7 @@ Formbuilder.registerField 'bullet_points',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-font'></span></span> Bullet Points
+    <span class='symbol'><span class='fa fa-list'></span></span> Bullet Points
   """
 
   defaultAttributes: (attrs) ->

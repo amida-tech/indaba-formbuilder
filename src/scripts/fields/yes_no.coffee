@@ -1,6 +1,6 @@
 Formbuilder.registerField 'yes_no',
 
-  order: 90
+  order: 100
 
   view: """
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>

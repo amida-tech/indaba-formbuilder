@@ -14,5 +14,5 @@ Formbuilder.registerField 'section_end',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-minus'></span></span> Section End
+    <span class='symbol'><span class='fa fa-arrow-left'></span></span> Section End
   """
