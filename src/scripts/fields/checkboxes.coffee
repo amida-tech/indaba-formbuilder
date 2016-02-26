@@ -3,25 +3,27 @@ Formbuilder.registerField 'checkboxes',
   order: 50
 
   view: """
+    <ol style='list-style-type: <%= rf.get(Formbuilder.options.mappings.OPTION_NUMBERING) %>;'>
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>
-      <div>
+      <li>
         <label class='fb-option'>
           <input type='checkbox' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick="javascript: return false;" />
           <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>
         </label>
-      </div>
+      </li>
     <% } %>
 
     <% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>
-      <div class='other-option'>
+      <li class='other-option'>
         <label class='fb-option'>
           <input type='checkbox' />
           Other
         </label>
 
         <input type='text' />
-      </div>
+      </li>
     <% } %>
+    </ol>
   """
 
   edit: """
@@ -42,5 +44,7 @@ Formbuilder.registerField 'checkboxes',
       checked: false,
       value: ""
     ]
+
+    attrs.field_options.option_numbering = 'none'
 
     attrs

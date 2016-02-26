@@ -426,6 +426,7 @@ class Formbuilder
       MINLENGTH: 'field_options.minlength'
       MAXLENGTH: 'field_options.maxlength'
       LENGTH_UNITS: 'field_options.min_max_length_units'
+      OPTION_NUMBERING: 'field_options.option_numbering'
 
     dict:
       ALL_CHANGES_SAVED: 'All changes saved'
