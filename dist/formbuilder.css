@@ -69,7 +69,7 @@
 .response-field-checkboxes .fb-option,.response-field-radio .fb-option{margin-bottom:5px;display:inline-block}
 .fb-edit-option{margin-bottom:3px}
 .fb-edit-option input{margin:0;vertical-align:top;display:inline-block}
-.fb-edit-option input[type="checkbox"]{margin:6px 4px 0}
+.fb-edit-option input[type="checkbox"],.fb-other input[type="checkbox"]{vertical-align:top;margin:6px 4px 0}
 .fb-other-option{display:inline-block;margin-right:4px;padding:3px;width:115px}
 .fb-edit-option .fb-option-label-input{width:115px;margin-right:4px}
 .fb-edit-link .fb-link-label-input,.fb-edit-link .fb-link-url-input{width:217px;margin-right:4px}
