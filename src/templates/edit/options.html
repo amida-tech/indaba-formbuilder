@@ -28,10 +28,11 @@
 </div>
 
 <% if (typeof includeOther !== 'undefined') { %>
-<label>
-    <input type='checkbox' data-rv-checked='model.<%= Formbuilder.options.mappings.INCLUDE_OTHER %>' />
-    Include "other"
-</label>
+<div class="fb-other">
+    <label><input type='checkbox' data-rv-checked='model.<%= Formbuilder.options.mappings.INCLUDE_OTHER %>' /><span 
+    class="fb-other-option">Include "other"
+    </span></label><input type="text" class="fb-other-value-input" data-rv-input="model.<%= Formbuilder.options.mappings.VALUE %>" placeholder="Value" />
+</div>
 <% } %>
 
 <div class='fb-bottom-add'>

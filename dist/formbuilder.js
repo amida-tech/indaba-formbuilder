@@ -1104,9 +1104,11 @@ __p += '\r\n\r\n<div class=\'fb-edit-option\' data-rv-each-option=\'model.' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
 '" title="Remove Option"><i class=\'fa fa-trash-o\'></i></a>\r\n</div>\r\n\r\n';
  if (typeof includeOther !== 'undefined') { ;
-__p += '\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
+__p += '\r\n<div class="fb-other">\r\n    <label><input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
-'\' />\r\n    Include "other"\r\n</label>\r\n';
+'\' /><span \r\n    class="fb-other-option">Include "other"\r\n    </span></label><input type="text" class="fb-other-value-input" data-rv-input="model.' +
+((__t = ( Formbuilder.options.mappings.VALUE )) == null ? '' : __t) +
+'" placeholder="Value" />\r\n</div>\r\n';
  } ;
 __p += '\r\n\r\n<div class=\'fb-bottom-add\'>\r\n    <a class="js-add-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
