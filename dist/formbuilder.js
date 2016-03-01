@@ -900,8 +900,6 @@ with (obj) {
 __p +=
 ((__t = ( Formbuilder.templates['edit/common']() )) == null ? '' : __t) +
 '\r\n' +
-((__t = ( Formbuilder.templates['edit/links']() )) == null ? '' : __t) +
-'\r\n' +
 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t) +
 '\r\n';
 
@@ -1243,8 +1241,6 @@ __p += '<div class=\'subtemplate-wrapper\'>\r\n    <div class=\'cover\'></div>\r
 ((__t = ( Formbuilder.templates['view/label']({rf: rf}) )) == null ? '' : __t) +
 '\r\n    ' +
 ((__t = ( Formbuilder.templates['view/description']({rf: rf}) )) == null ? '' : __t) +
-'\r\n    ' +
-((__t = ( Formbuilder.templates['view/links']({rf: rf}) )) == null ? '' : __t) +
 '\r\n\r\n    ' +
 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
 '\r\n\r\n    ' +
