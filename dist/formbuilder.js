@@ -1023,7 +1023,7 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<input type=\'text\' data-rv-input=\'model.' +
 ((__t = ( Formbuilder.options.mappings.VALUE )) == null ? '' : __t) +
-'\' class="fb-large-input" placeholder="Value" />\r\n';
+'\' class="fb-large-input" placeholder="Num. value" />\r\n';
 
 }
 return __p
@@ -1096,7 +1096,7 @@ __p += '\r\n<label>\r\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
  } ;
 __p += '\r\n\r\n<div class=\'fb-edit-option\' data-rv-each-option=\'model.' +
 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) +
-'\'>\r\n    <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" \r\n    /><input type="text" class="fb-option-label-input" data-rv-input="option:label" placeholder="Label"\r\n    /><input type="text" class="fb-option-value-input" data-rv-input="option:value" placeholder="Value"\r\n    /><a class="js-add-option ' +
+'\'>\r\n    <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" \r\n    /><input type="text" class="fb-option-label-input" data-rv-input="option:label" placeholder="Label"\r\n    /><input type="text" class="fb-option-value-input" data-rv-input="option:value" placeholder="Num. value"\r\n    /><a class="js-add-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
 '" title="Add Option"><i class=\'fa fa-plus\'></i>\r\n    </a><a class="js-remove-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
@@ -1106,7 +1106,7 @@ __p += '\r\n<div class="fb-other">\r\n    <label><input type=\'checkbox\' data-r
 ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
 '\' /><span \r\n    class="fb-other-option">Include "other"\r\n    </span></label><input type="text" class="fb-other-value-input" data-rv-input="model.' +
 ((__t = ( Formbuilder.options.mappings.VALUE )) == null ? '' : __t) +
-'" placeholder="Value" />\r\n</div>\r\n';
+'" placeholder="Num. value" />\r\n</div>\r\n';
  } ;
 __p += '\r\n\r\n<div class=\'fb-bottom-add\'>\r\n    <a class="js-add-option ' +
 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
