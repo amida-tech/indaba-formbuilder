@@ -16,5 +16,5 @@ Formbuilder.registerField 'number',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-number'>123</span></span> Number
+    <span class='symbol'><span class='fa fa-number'>123</span></span> <%= Formbuilder.i18n('NUMBER') %>
   """

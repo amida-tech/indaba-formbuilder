@@ -21,7 +21,7 @@ Formbuilder.registerField 'dropdown',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-caret-down'></span></span> Dropdown
+    <span class='symbol'><span class='fa fa-caret-down'></span></span> <%= Formbuilder.i18n('DROPDOWN') %>
   """
 
   defaultAttributes: (attrs) ->

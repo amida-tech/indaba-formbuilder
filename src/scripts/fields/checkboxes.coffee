@@ -17,7 +17,7 @@ Formbuilder.registerField 'checkboxes',
       <li class='other-option'>
         <label class='fb-option'>
           <input type='checkbox' />
-          Other
+          <%= Formbuilder.i18n('OTHER') %>
         </label>
 
         <input type='text' />
@@ -31,7 +31,7 @@ Formbuilder.registerField 'checkboxes',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-square-o'></span></span> Checkboxes
+    <span class='symbol'><span class='fa fa-square-o'></span></span> <%= Formbuilder.i18n('CHECKBOXES') %>
   """
 
   defaultAttributes: (attrs) ->

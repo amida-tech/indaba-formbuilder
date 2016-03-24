@@ -11,13 +11,13 @@ Formbuilder.registerField 'radio',
           <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>
         </label>
       </li>
-    <% } %>    
+    <% } %>
 
     <% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>
       <li class='other-option'>
         <label class='fb-option'>
           <input type='radio' />
-          Other
+          <%= Formbuilder.i18n('OTHER') %>
         </label>
 
         <input type='text' />
@@ -31,7 +31,7 @@ Formbuilder.registerField 'radio',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-circle-o'></span></span> Multiple Choice
+    <span class='symbol'><span class='fa fa-circle-o'></span></span> <%= Formbuilder.i18n('MULTIPLE_CHOICE') %>
   """
 
   defaultAttributes: (attrs) ->
@@ -45,7 +45,7 @@ Formbuilder.registerField 'radio',
       checked: false,
       value: ""
     ]
-    
+
     attrs.field_options.option_numbering = 'none'
-    
+
     attrs

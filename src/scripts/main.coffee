@@ -112,7 +112,7 @@ class EditFieldView extends Backbone.View
     @model.set Formbuilder.options.mappings.OPTIONS, options
     @model.trigger "change:#{Formbuilder.options.mappings.OPTIONS}"
     @forceRender()
-    
+
   addLink: (e) ->
     $el = $(e.currentTarget)
     i = @$el.find('.fb-edit-link').index($el.closest('.fb-edit-link'))
@@ -385,10 +385,20 @@ class BuilderView extends Backbone.View
 
 
 class Formbuilder
+  @i18n: (key, data) ->
+    data = data || {}
+    translation = @options.dict[key]
+    if translation
+      for k in data
+        translation = translation.split('{{' + k + '}}').join(data[k])
+    else
+      translation = key
+    return translation
+
   @helpers:
     defaultFieldAttrs: (field_type) ->
       attrs = {}
-      attrs[Formbuilder.options.mappings.LABEL] = 'Untitled'
+      attrs[Formbuilder.options.mappings.LABEL] = Formbuilder.i18n('UNTITLED')
       attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type
       attrs[Formbuilder.options.mappings.REQUIRED] = true
       attrs['field_options'] = {}
@@ -412,7 +422,7 @@ class Formbuilder
       FIELD_TYPE: 'field_type'
       REQUIRED: 'required'
       ATTACHMENT: 'attachment'
-      ADMIN_ONLY: 'admin_only'      
+      ADMIN_ONLY: 'admin_only'
       OPTIONS: 'field_options.options'
       LINKS: 'field_options.links'
       VALUE: 'field_options.value'
@@ -432,14 +442,75 @@ class Formbuilder
       ALL_CHANGES_SAVED: 'All changes saved'
       SAVE_FORM: 'Save form'
       UNSAVED_CHANGES: 'You have unsaved changes. If you leave this page, you will lose those changes!'
+      UNTITLED: 'Untitled'
+      DUPLICATE_FIELD: 'Duplicate Field'
+      REMOVE_FIELD: 'Remove Field'
+      LINKS: 'Links'
+      NO_RESPONSE_FIELDS: 'No response fields'
+      ADD_NEW_FIELD: 'Add new field'
+      EDIT_FIELD: 'Edit field'
+      REQUIRED: 'Required'
+      ADD_ATTACHMENT: 'Add attachment'
+      QUESTION: 'Question'
+      LABEL: 'Label'
+      INTEGER_ONLY: 'Integer only'
+      ONLY_ACCEPT_INTEGERS: 'Only accept integers'
+      TITLE: 'Title'
+      ADD_LONGER_DESCRIPTION: 'Add a longer description to this field',
+      QUESTION_ID: 'Question ID'
+      VALUE: 'Value'
+      REFERENCES: 'References'
+      REFERENCE: 'Reference'
+      ADD_LINK: 'Add Link'
+      REMOVE_LINK: 'Remove Link'
+      MINIMUM_MAXIMUM: 'Minimum / Maximum'
+      ABOVE: 'Above'
+      BELOW: 'Below'
+      LENGTH_LIMIT: 'Length Limit'
+      MIN: 'Min'
+      MAX: 'Max'
+      CHARACTERS: 'characters'
+      WORDS: 'words'
+      OPTIONS: 'Options'
+      OPTIONS_NUMBERING: 'Options numbering'
+      NONE: 'None'
+      DECIMAL: 'Decimal'
+      LOWER_LATIN: 'Lower-latin'
+      UPPER_LATIN: 'Upper-latin'
+      INCLUDE_BLANK: 'Include blank'
+      ADD_OPTION: 'Add Option'
+      REMOVE_OPTION: 'Remove Option'
+      INCLUDE_OTHER: 'Include "other"'
+      SIZE: 'Size'
+      SMALL: 'Small'
+      MEDIUM: 'Medium'
+      LARGE: 'Large'
+      UNITS: 'Units'
+      OTHER: 'Other'
+      BULLET_POINTS: 'Bullet Points'
+      CHECKBOXES: 'Checkboxes'
+      DATE: 'Date'
+      DROPDOWN: 'Dropdown'
+      NUMBER: 'Number'
+      PARAGRAPH: 'Paragraph'
+      MULTIPLE_CHOICE: 'Multiple Choice'
+      SCALE: 'Scale'
+      SECTION_BREAK: 'Section Break'
+      SECTION_END: 'Section End'
+      SECTION_START: 'Section Start'
+      TEXT: 'Text'
+      YES_NO: 'Yes/No'
+      YES: 'Yes'
+      NO: 'No'
 
   @fields: {}
   @inputFields: {}
   @nonInputFields: {}
 
   @registerField: (name, opts) ->
-    for x in ['view', 'edit']
-      opts[x] = _.template(opts[x])
+    for x in ['view', 'edit', 'addButton']
+      if opts[x]
+        opts[x] = _.template(opts[x])
 
     opts.field_type = name
 

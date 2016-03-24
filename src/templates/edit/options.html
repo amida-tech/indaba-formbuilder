@@ -1,13 +1,13 @@
-<div class='fb-edit-section-header'>Options</div>
+<div class='fb-edit-section-header'><%= Formbuilder.i18n('OPTIONS') %></div>
 
 <% if (typeof excludeOptionNumbering === 'undefined') { %>
 <div>
-    Options numbering:
+    <%= Formbuilder.i18n('OPTIONS_NUMBERING') %>:
     <select data-rv-value='model.<%= Formbuilder.options.mappings.OPTION_NUMBERING %>'>
-        <option selected="selected" value="none">none</option>
-        <option value="decimal">decimal</option>
-        <option value="lower-latin">lower-latin</option>
-        <option value="upper-latin">upper-latin</option>
+        <option selected="selected" value="none"><%= Formbuilder.i18n('NONE') %></option>
+        <option value="decimal"><%= Formbuilder.i18n('DECIMAL') %></option>
+        <option value="lower-latin"><%= Formbuilder.i18n('LOWER_LATIN') %></option>
+        <option value="upper-latin"><%= Formbuilder.i18n('UPPER_LATIN') %></option>
     </select>
 </div>
 <% } %>
@@ -15,26 +15,26 @@
 <% if (typeof includeBlank !== 'undefined') { %>
 <label>
     <input type='checkbox' data-rv-checked='model.<%= Formbuilder.options.mappings.INCLUDE_BLANK %>' />
-    Include blank
+    <%= Formbuilder.i18n('INCLUDE_BLANK') %>
 </label>
 <% } %>
 
 <div class='fb-edit-option' data-rv-each-option='model.<%= Formbuilder.options.mappings.OPTIONS %>'>
-    <input type="checkbox" class='js-default-updated' data-rv-checked="option:checked" 
-    /><input type="text" class="fb-option-label-input" data-rv-input="option:label" placeholder="Label"
-    /><input type="text" class="fb-option-value-input" data-rv-input="option:value" placeholder="Num. value"
-    /><a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS %>" title="Add Option"><i class='fa fa-plus'></i>
-    </a><a class="js-remove-option <%= Formbuilder.options.BUTTON_CLASS %>" title="Remove Option"><i class='fa fa-trash-o'></i></a>
+    <input type="checkbox" class='js-default-updated' data-rv-checked="option:checked"
+    /><input type="text" class="fb-option-label-input" data-rv-input="option:label" placeholder="<%= Formbuilder.i18n('LABEL') %>"
+    /><input type="text" class="fb-option-value-input" data-rv-input="option:value" placeholder="<%= Formbuilder.i18n('VALUE') %>"
+    /><a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS %>" title="<%= Formbuilder.i18n('ADD_OPTION') %>"><i class='fa fa-plus'></i>
+    </a><a class="js-remove-option <%= Formbuilder.options.BUTTON_CLASS %>" title="<%= Formbuilder.i18n('REMOVE_OPTION') %>"><i class='fa fa-trash-o'></i></a>
 </div>
 
 <% if (typeof includeOther !== 'undefined') { %>
 <div class="fb-other">
-    <label><input type='checkbox' data-rv-checked='model.<%= Formbuilder.options.mappings.INCLUDE_OTHER %>' /><span 
-    class="fb-other-option">Include "other"
-    </span></label><input type="text" class="fb-other-value-input" data-rv-input="model.<%= Formbuilder.options.mappings.VALUE %>" placeholder="Num. value" />
+    <label><input type='checkbox' data-rv-checked='model.<%= Formbuilder.options.mappings.INCLUDE_OTHER %>' /><span
+    class="fb-other-option"><%= Formbuilder.i18n('INCLUDE_OTHER') %>
+    </span></label><input type="text" class="fb-other-value-input" data-rv-input="model.<%= Formbuilder.options.mappings.VALUE %>" placeholder="<%= Formbuilder.i18n('VALUE') %>" />
 </div>
 <% } %>
 
 <div class='fb-bottom-add'>
-    <a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS %>">Add option</a>
+    <a class="js-add-option <%= Formbuilder.options.BUTTON_CLASS %>"><%= Formbuilder.i18n('ADD_OPTION') %></a>
 </div>

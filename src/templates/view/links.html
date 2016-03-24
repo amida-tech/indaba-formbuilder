@@ -1,6 +1,6 @@
 <% if ((rf.get(Formbuilder.options.mappings.LINKS) || []).length > 0) { %>
 <div class="fb-links">
-    <div class="fb-links-title">Links:</div>
+    <div class="fb-links-title"><%= Formbuilder.i18n('LINKS') %>:</div>
     <ul>
         <% for (i in (rf.get(Formbuilder.options.mappings.LINKS) || [])) { %>
         <li>

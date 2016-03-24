@@ -1,7 +1,7 @@
 Formbuilder.registerField 'section_start',
 
   order: 99
-  
+
   type: 'non_input'
 
   view: """
@@ -11,11 +11,11 @@ Formbuilder.registerField 'section_start',
   """
 
   edit: """
-    <div class='fb-edit-section-header'>Label</div>
-    <input type='text' data-rv-input='model.<%= Formbuilder.options.mappings.LABEL %>' class='fb-large-input' placeholder='Title' />
-    <textarea data-rv-input='model.<%= Formbuilder.options.mappings.DESCRIPTION %>' class='fb-large-input' placeholder='Add a longer description to this field'></textarea>
+    <div class='fb-edit-section-header'><%= Formbuilder.i18n('LABEL') %></div>
+    <input type='text' data-rv-input='model.<%= Formbuilder.options.mappings.LABEL %>' class='fb-large-input' placeholder="<%= Formbuilder.i18n('TITLE') %>" />
+    <textarea data-rv-input='model.<%= Formbuilder.options.mappings.DESCRIPTION %>' class='fb-large-input' placeholder="<%= Formbuilder.i18n('ADD_LONGER_DESCRIPTION') %>"></textarea>
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-arrow-right'></span></span> Section Start
+    <span class='symbol'><span class='fa fa-arrow-right'></span></span> <%= Formbuilder.i18n('SECTION_START') %>
   """

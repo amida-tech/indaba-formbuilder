@@ -17,7 +17,7 @@ Formbuilder.registerField 'yes_no',
       <li class='other-option'>
         <label class='fb-option'>
           <input type='radio' />
-          Other
+          <%= Formbuilder.i18n('OTHER') %>
         </label>
 
         <input type='text' />
@@ -31,21 +31,21 @@ Formbuilder.registerField 'yes_no',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-circle-o'></span></span> Yes/No
+    <span class='symbol'><span class='fa fa-circle-o'></span></span> <%= Formbuilder.i18n('YES_NO') %>
   """
 
   defaultAttributes: (attrs) ->
     # @todo
     attrs.field_options.options = [
-      label: "Yes",
+      label: Formbuilder.i18n('YES'),
       checked: false,
       value: ""
     ,
-      label: "No",
+      label: Formbuilder.i18n('NO'),
       checked: false,
       value: ""
     ]
-    
+
     attrs.field_options.option_numbering = 'none'
 
     attrs

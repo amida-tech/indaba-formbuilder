@@ -1,16 +1,16 @@
-<div class='fb-edit-section-header'>Length Limit</div>
+<div class='fb-edit-section-header'><%= Formbuilder.i18n('LENGTH_LIMIT') %></div>
 
-Min
+<%= Formbuilder.i18n('MIN') %>
 <input type="text" data-rv-input="model.<%= Formbuilder.options.mappings.MINLENGTH %>" style="width: 30px" />
 
 &nbsp;&nbsp;
 
-Max
+<%= Formbuilder.i18n('MAX') %>
 <input type="text" data-rv-input="model.<%= Formbuilder.options.mappings.MAXLENGTH %>" style="width: 30px" />
 
 &nbsp;&nbsp;
 
 <select data-rv-value="model.<%= Formbuilder.options.mappings.LENGTH_UNITS %>" style="width: auto;">
-  <option value="characters">characters</option>
-  <option value="words">words</option>
+  <option value="characters"><%= Formbuilder.i18n('CHARACTERS') %></option>
+  <option value="words"><%= Formbuilder.i18n('WORDS') %></option>
 </select>

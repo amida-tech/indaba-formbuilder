@@ -1,12 +1,12 @@
-<div class='fb-edit-section-header'>References</div>
+<div class='fb-edit-section-header'><%= Formbuilder.i18n('REFERENCES') %></div>
 
 <div class='fb-edit-link' data-rv-each-option='model.<%= Formbuilder.options.mappings.LINKS %>'>
-    <input type="text" class="fb-link-label-input" data-rv-input="option:label" placeholder="Reference" 
+    <input type="text" class="fb-link-label-input" data-rv-input="option:label" placeholder="<%= Formbuilder.i18n('REFERENCE') %>"
     /><!--<input type="text" class="fb-link-url-input" data-rv-input="option:url" placeholder="Url"
-    />--><a class="js-add-link <%= Formbuilder.options.BUTTON_CLASS %>" title="Add Link"><i class='fa fa-plus'></i>
-    </a><a class="js-remove-link <%= Formbuilder.options.BUTTON_CLASS %>" title="Remove Link"><i class='fa fa-trash-o'></i></a>
+    />--><a class="js-add-link <%= Formbuilder.options.BUTTON_CLASS %>" title="<%= Formbuilder.i18n('ADD_LINK') %>"><i class='fa fa-plus'></i>
+    </a><a class="js-remove-link <%= Formbuilder.options.BUTTON_CLASS %>" title="<%= Formbuilder.i18n('REMOVE_LINK') %>"><i class='fa fa-trash-o'></i></a>
 </div>
 
 <div class='fb-bottom-add'>
-    <a class="js-add-link <%= Formbuilder.options.BUTTON_CLASS %>">Add link</a>
+    <a class="js-add-link <%= Formbuilder.options.BUTTON_CLASS %>"><%= Formbuilder.i18n('ADD_LINK') %></a>
 </div>

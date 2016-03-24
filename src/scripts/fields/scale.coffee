@@ -16,5 +16,5 @@ Formbuilder.registerField 'scale',
   """
 
   addButton: """
-    <span class='symbol'><span class='fa fa-exchange'></span></span> Scale
+    <span class='symbol'><span class='fa fa-exchange'></span></span> <%= Formbuilder.i18n('SCALE') %>
   """
