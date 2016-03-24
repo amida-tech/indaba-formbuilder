@@ -9,7 +9,9 @@ Formbuilder.registerField 'date',
     </div>
   """
 
-  edit: ""
+  edit: """
+    <span></span>
+  """
 
   addButton: """
     <span class="symbol"><span class="fa fa-calendar"></span></span> <%= Formbuilder.i18n('DATE') %>

@@ -800,7 +800,7 @@
   Formbuilder.registerField('date', {
     order: 70,
     view: "<div class='fb-date'>\n    <input type=\"text\" />\n    <span class=\"symbol\"><span class=\"fa fa-calendar\"></span></span>\n</div>",
-    edit: "",
+    edit: "<span></span>",
     addButton: "<span class=\"symbol\"><span class=\"fa fa-calendar\"></span></span> <%= Formbuilder.i18n('DATE') %>"
   });
 
