@@ -624,6 +624,7 @@
         FIELD_TYPE: 'field_type',
         REQUIRED: 'required',
         ATTACHMENT: 'attachment',
+        COMMENTS: 'hasComments',
         ADMIN_ONLY: 'admin_only',
         OPTIONS: 'field_options.options',
         LINKS: 'field_options.links',
@@ -653,6 +654,7 @@
         EDIT_FIELD: 'Edit field',
         REQUIRED: 'Required',
         ADD_ATTACHMENT: 'Add attachment',
+        ADD_COMMENTS: 'Add comments',
         QUESTION: 'Question',
         LABEL: 'Label',
         INTEGER_ONLY: 'Integer only',
@@ -1024,6 +1026,10 @@ __p += '<label>\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.ATTACHMENT )) == null ? '' : __t) +
 '\' />\n    ' +
 ((__t = ( Formbuilder.i18n('ADD_ATTACHMENT') )) == null ? '' : __t) +
+'\n</label>\n<label>\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
+((__t = ( Formbuilder.options.mappings.COMMENTS )) == null ? '' : __t) +
+'\' />\n    ' +
+((__t = ( Formbuilder.i18n('ADD_COMMENTS') )) == null ? '' : __t) +
 '\n</label>\n';
 
 }
