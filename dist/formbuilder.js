@@ -625,6 +625,7 @@
         REQUIRED: 'required',
         ATTACHMENT: 'attachment',
         COMMENTS: 'hasComments',
+        WITH_LINKS: 'withLinks',
         ADMIN_ONLY: 'admin_only',
         OPTIONS: 'field_options.options',
         LINKS: 'field_options.links',
@@ -655,6 +656,7 @@
         REQUIRED: 'Required',
         ADD_ATTACHMENT: 'Add attachment',
         ADD_COMMENTS: 'Add comments',
+        WITH_LINKS: 'With links',
         QUESTION: 'Question',
         LABEL: 'Label',
         INTEGER_ONLY: 'Integer only',
@@ -1030,6 +1032,10 @@ __p += '<label>\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
 ((__t = ( Formbuilder.options.mappings.COMMENTS )) == null ? '' : __t) +
 '\' />\n    ' +
 ((__t = ( Formbuilder.i18n('ADD_COMMENTS') )) == null ? '' : __t) +
+'\n</label>\n<label>\n    <input type=\'checkbox\' data-rv-checked=\'model.' +
+((__t = ( Formbuilder.options.mappings.WITH_LINKS )) == null ? '' : __t) +
+'\' />\n    ' +
+((__t = ( Formbuilder.i18n('WITH_LINKS') )) == null ? '' : __t) +
 '\n</label>\n';
 
 }
