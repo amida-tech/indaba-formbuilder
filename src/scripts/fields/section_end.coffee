@@ -10,7 +10,7 @@ Formbuilder.registerField 'section_end',
   """
 
   edit: """
-
+    <hr />
   """
 
   addButton: """

@@ -209,7 +209,9 @@
     };
 
     EditFieldView.prototype.render = function() {
-      this.$el.html(Formbuilder.templates["edit/base" + (this.model.getTemplateSuffix())]({
+      var _sfx;
+      _sfx = this.model.getTemplateSuffix();
+      this.$el.html(Formbuilder.templates["edit/base" + _sfx]({
         rf: this.model
       }));
       rivets.bind(this.$el, {
@@ -970,7 +972,7 @@
     order: 101,
     type: 'non_input',
     view: "<hr />",
-    edit: "",
+    edit: "<hr />",
     addButton: "<span class='symbol'><span class='fa fa-arrow-left'></span></span> <%= Formbuilder.i18n('SECTION_END') %>"
   });
 

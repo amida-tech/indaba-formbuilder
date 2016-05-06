@@ -96,7 +96,8 @@ class EditFieldView extends Backbone.View
     @listenTo @model, "destroy", @remove
 
   render: ->
-    @$el.html(Formbuilder.templates["edit/base#{@model.getTemplateSuffix()}"]({rf: @model}))
+    _sfx = @model.getTemplateSuffix()
+    @$el.html(Formbuilder.templates["edit/base#{_sfx}"]({rf: @model}))
     rivets.bind @$el, {model: @model}
     return @
 
