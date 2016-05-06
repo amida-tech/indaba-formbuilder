@@ -482,7 +482,6 @@
     BuilderView.prototype.setDraggable = function() {
       var $addFieldButtons,
         _this = this;
-      console.log('set draggable', this.$el);
       $addFieldButtons = this.$el.find("[data-field-type]");
       return $addFieldButtons.draggable({
         connectToSortable: this.$responseFields,

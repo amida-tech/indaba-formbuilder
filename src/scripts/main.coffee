@@ -309,7 +309,6 @@ class BuilderView extends Backbone.View
     @setDraggable()
 
   setDraggable: ->
-    console.log 'set draggable', @$el
     $addFieldButtons = @$el.find("[data-field-type]")
 
     $addFieldButtons.draggable
