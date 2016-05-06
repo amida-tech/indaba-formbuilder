@@ -3,9 +3,17 @@ class FormbuilderModel extends Backbone.DeepModel
   indexInDOM: ->
     $wrapper = $(".fb-field-wrapper").filter ( (_, el) => $(el).data('cid') == @cid  )
     $(".fb-field-wrapper").index $wrapper
+
   is_input: ->
     Formbuilder.inputFields[@get(Formbuilder.options.mappings.FIELD_TYPE)]?
 
+  is_editor: ->
+    Formbuilder.wysiwygFields[@get(Formbuilder.options.mappings.FIELD_TYPE)]?
+
+  getTemplateSuffix: ->
+    if @.is_editor() then '_wysiwyg'
+    else if  !@.is_input() then '_non_input'
+    else ''
 
 class FormbuilderCollection extends Backbone.Collection
   initialize: ->
@@ -34,10 +42,10 @@ class ViewFieldView extends Backbone.View
     @listenTo @model, "destroy", @remove
 
   render: ->
-    #TODO: problem on option checked change (1 step back)
+#TODO: problem on option checked change (1 step back)
     @$el.addClass('response-field-' + @model.get(Formbuilder.options.mappings.FIELD_TYPE))
-        .data('cid', @model.cid)
-        .html(Formbuilder.templates["view/base#{if !@model.is_input() then '_non_input' else ''}"]({rf: @model}))
+    .data('cid', @model.cid)
+    .html(Formbuilder.templates["view/base#{@model.getTemplateSuffix()}"]({rf: @model}))
 
     return @
 
@@ -66,7 +74,7 @@ class ViewFieldView extends Backbone.View
     attrs = _.clone(@model.attributes)
     delete attrs['id']
     attrs['label'] += ' Copy'
-    @parentView.createField attrs, { position: @model.indexInDOM() + 1 }
+    @parentView.createField attrs, {position: @model.indexInDOM() + 1}
 
 
 class EditFieldView extends Backbone.View
@@ -81,15 +89,15 @@ class EditFieldView extends Backbone.View
     'click .js-add-link': 'addLink'
     'click .js-remove-link': 'removeLink'
     'input .fb-link-label-input': 'forceRender'
-    #'input .fb-link-url-input': 'forceRender'
+#'input .fb-link-url-input': 'forceRender'
 
   initialize: (options) ->
     {@parentView} = options
     @listenTo @model, "destroy", @remove
 
   render: ->
-    @$el.html(Formbuilder.templates["edit/base#{if !@model.is_input() then '_non_input' else ''}"]({rf: @model}))
-    rivets.bind @$el, { model: @model }
+    @$el.html(Formbuilder.templates["edit/base#{@model.getTemplateSuffix()}"]({rf: @model}))
+    rivets.bind @$el, {model: @model}
     return @
 
   remove: ->
@@ -97,7 +105,7 @@ class EditFieldView extends Backbone.View
     @parentView.$el.find("[data-target=\"#addField\"]").click()
     super
 
-  # @todo this should really be on the model, not the view
+# @todo this should really be on the model, not the view
   addOption: (e) ->
     $el = $(e.currentTarget)
     i = @$el.find('.fb-edit-option').index($el.closest('.fb-edit-option'))
@@ -117,7 +125,7 @@ class EditFieldView extends Backbone.View
     $el = $(e.currentTarget)
     i = @$el.find('.fb-edit-link').index($el.closest('.fb-edit-link'))
     links = @model.get(Formbuilder.options.mappings.LINKS) || []
-    newLink = {label: '' } #, url: ''}
+    newLink = {label: ''} #, url: ''}
 
     if i > -1
       links.splice(i + 1, 0, newLink)
@@ -157,6 +165,14 @@ class EditFieldView extends Backbone.View
   forceRender: ->
     @model.trigger('change')
 
+class PolicyEdit extends Backbone.View
+  initialize: (options) ->
+    {@parentView} = options
+    #    @listenTo @model, "destroy", @remove
+    @render()
+
+  render: ->
+
 
 class BuilderView extends Backbone.View
   SUBVIEWS: []
@@ -169,7 +185,7 @@ class BuilderView extends Backbone.View
     'mouseout .fb-add-field-types': 'unlockLeftWrapper'
 
   initialize: (options) ->
-    {selector, @formBuilder, @bootstrapData} = options
+    {selector, @formBuilder, @bootstrapData, @withPolicies} = options
 
     # This is a terrible idea because it's not scoped to this view.
     if selector?
@@ -207,9 +223,12 @@ class BuilderView extends Backbone.View
   render: ->
     @$el.html Formbuilder.templates['page']()
 
+    @addPolicies() if @withPolicies
+
     # Save jQuery objects for easy use
     @$fbLeft = @$el.find('.fb-menu')
     @$responseFields = @$el.find('.fb-response-fields')
+    @$policyBlock = @$el.find('.fb-policy-blocks')
 
     @bindWindowScrollEvent()
     @hideShowNoResponseFields()
@@ -240,32 +259,36 @@ class BuilderView extends Backbone.View
       @createAndShowEditView(first_model)
 
   addOne: (responseField, _, options) ->
-    view = new ViewFieldView
-      model: responseField
-      parentView: @
+    _wrapper = if responseField.is_editor() then @$policyBlock else @$responseFields
 
-    #####
-    # Calculates where to place this new field.
-    #
-    # Are we replacing a temporarily drag placeholder?
-    if options.$replaceEl?
-      options.$replaceEl.replaceWith(view.render().el)
+    if _wrapper
+      view = new ViewFieldView
+        model: responseField
+        parentView: @
 
-    # Are we adding to the bottom?
-    else if !options.position? || options.position == -1
-      @$responseFields.append view.render().el
 
-    # Are we adding to the top?
-    else if options.position == 0
-      @$responseFields.prepend view.render().el
+      #####
+      # Calculates where to place this new field.
+      #
+      # Are we replacing a temporarily drag placeholder?
+      if options.$replaceEl?
+        options.$replaceEl.replaceWith(view.render().el)
 
-    # Are we adding below an existing field?
-    else if ($replacePosition = @$responseFields.find(".fb-field-wrapper").eq(options.position))[0]
-      $replacePosition.before view.render().el
+# Are we adding to the bottom?
+      else if !options.position? || options.position == -1
+        _wrapper.append view.render().el
 
-    # Catch-all: add to bottom
-    else
-      @$responseFields.append view.render().el
+# Are we adding to the top?
+      else if options.position == 0
+        _wrapper.prepend view.render().el
+
+# Are we adding below an existing field?
+      else if ($replacePosition = _wrapper.find(".fb-field-wrapper").eq(options.position))[0]
+        $replacePosition.before view.render().el
+
+# Catch-all: add to bottom
+      else
+        _wrapper.append view.render().el
 
   setSortable: ->
     @$responseFields.sortable('destroy') if @$responseFields.hasClass('ui-sortable')
@@ -280,12 +303,13 @@ class BuilderView extends Backbone.View
         @handleFormUpdate()
         return true
       update: (e, ui) =>
-        # ensureEditViewScrolled, unless we're updating from the draggable
+# ensureEditViewScrolled, unless we're updating from the draggable
         @ensureEditViewScrolled() unless ui.item.data('field-type')
 
     @setDraggable()
 
   setDraggable: ->
+    console.log 'set draggable', @$el
     $addFieldButtons = @$el.find("[data-field-type]")
 
     $addFieldButtons.draggable
@@ -315,7 +339,7 @@ class BuilderView extends Backbone.View
     @handleFormUpdate()
 
   createAndShowEditView: (model) ->
-    $responseFieldEl = @$el.find(".fb-field-wrapper").filter( -> $(@).data('cid') == model.cid )
+    $responseFieldEl = @$el.find(".fb-field-wrapper").filter(-> $(@).data('cid') == model.cid)
     $responseFieldEl.addClass('editing').siblings('.fb-field-wrapper').removeClass('editing')
 
     if @editView
@@ -377,12 +401,14 @@ class BuilderView extends Backbone.View
         @updatingBatch = true
 
         for datum in data
-          # set the IDs of new response fields, returned from the server
+# set the IDs of new response fields, returned from the server
           @collection.get(datum.cid)?.set({id: datum.id})
           @collection.trigger 'sync'
 
         @updatingBatch = undefined
 
+  addPolicies: ->
+    @$el.find('.fb-form').prepend(Formbuilder.templates['partials/policy_side']())
 
 class Formbuilder
   @i18n: (key, data) ->
@@ -506,10 +532,17 @@ class Formbuilder
       YES_NO: 'Yes/No'
       YES: 'Yes'
       NO: 'No'
+      WYSIWYG: 'Text Editor'
+      UPLOAD: 'Upload'
+      ATTACHMENTS: 'Attachments'
+      POLICY_UPLOAD_TEXT: 'Copy and paste text into sections below or upload a draft written using the template to automatically divide it into sections below'
+      POLICY_PLACEHOLDER: 'Place text here...'
+      POLICY: "Policy"
 
   @fields: {}
   @inputFields: {}
   @nonInputFields: {}
+  @wysiwygFields: {}
 
   @registerField: (name, opts) ->
     for x in ['view', 'edit', 'addButton']
@@ -520,12 +553,13 @@ class Formbuilder
 
     Formbuilder.fields[name] = opts
 
-    if opts.type == 'non_input'
-      Formbuilder.nonInputFields[name] = opts
-    else
-      Formbuilder.inputFields[name] = opts
+    switch opts.type
+      when 'non_input' then Formbuilder.nonInputFields[name] = opts
+      when 'wysiwyg' then Formbuilder.wysiwygFields[name] = opts
+      else
+        Formbuilder.inputFields[name] = opts
 
-  constructor: (opts={}) ->
+  constructor: (opts = {}) ->
     _.extend @, Backbone.Events
     args = _.extend opts, {formBuilder: @}
     @mainView = new BuilderView args

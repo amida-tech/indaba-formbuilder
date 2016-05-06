@@ -2,9 +2,9 @@
 .fb-button[disabled]{background:#ddd !important;border:thin solid #ccc;color:#777 !important;text-shadow:none !important;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";opacity:.65;cursor:default}
 .fb-clear{clear:both}
 .fb-main{max-width:1000px;margin:0 auto;padding:0 0 0 20px;position:relative;font-family:'Source Sans Pro','Open Sans',Tahoma}
-.fb-save-wrapper{position:absolute;left:20px;top:10px}
+.fb-save-wrapper{left:20px;top:10px}
 .fb-menu{float:right;width:320px;padding-top:30px}
-.fb-form{padding-top:70px;margin-right:320px;border-right:1px solid #ddd;padding-right:20px;min-height:100%;overflow:hidden}
+.fb-form{margin-right:320px;border-right:1px solid #ddd;padding:15px 20px 0 0;min-height:100%;overflow:hidden}
 .fb-no-response-fields{color:#999}
 .fb-tabs{list-style:none;margin:0 0 20px 0;padding:0 0 0 20px;border-bottom:1px solid #ccc}
 .fb-tabs li{display:inline-block}
@@ -50,7 +50,7 @@
 .fb-edit-field-wrapper .fb-edit-section-header{border-bottom:1px solid #ddd;margin-top:25px;margin-bottom:10px;padding-bottom:5px;clear:both;font-weight:700}
 .fb-edit-field-wrapper .js-add-option,.fb-edit-field-wrapper .js-remove-option,.fb-edit-field-wrapper .js-add-link,.fb-edit-field-wrapper .js-remove-link{border:1px solid #7abc55;vertical-aling:middle;background-color:transparent;padding:3px 6px}
 .fb-edit-field-wrapper .js-add-option.fb-button,.fb-edit-field-wrapper .js-add-link.fb-button{background-color:#7abc55}
-.fb-edit-field-wrapper .js-remove-option  .fa,.fb-edit-field-wrapper .js-remove-link  .fa{color:#7abc55;display:inline-block}
+.fb-edit-field-wrapper .js-remove-option .fa,.fb-edit-field-wrapper .js-remove-link .fa{color:#7abc55;display:inline-block}
 .fb-edit-field-wrapper .fb-bottom-add{margin-top:8px}
 .fb-large-input{width:100%}
 .fb-common-wrapper .fb-label-description textarea{min-height:5em}
@@ -99,3 +99,7 @@
 .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .fb-field-wrapper{margin-left:-80px}
 .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end,.response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~ .response-field-section_start ~,.response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .response-field-section_end ~ .fb-field-wrapper{margin-left:-200px}
 .response-field-scale .fa-chevron-left,.response-field-scale .fa-chevron-right{margin:0 3px;color:#808080}
+.fb-policy-wrapper{border-color:#ddd;border-top:thin solid #ddd;border-bottom:thin solid #ddd;padding:15px}
+.fb-policy-wrapper .help-block{font-size:12px}
+.fb-policy-blocks{margin:10px 0}
+.response-field-policy textarea{width:100%}

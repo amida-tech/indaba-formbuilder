@@ -41,7 +41,7 @@
 }).call(this);
 
 (function() {
-  var BuilderView, EditFieldView, Formbuilder, FormbuilderCollection, FormbuilderModel, ViewFieldView, _ref, _ref1, _ref2, _ref3, _ref4,
+  var BuilderView, EditFieldView, Formbuilder, FormbuilderCollection, FormbuilderModel, PolicyEdit, ViewFieldView, _ref, _ref1, _ref2, _ref3, _ref4, _ref5,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -66,6 +66,20 @@
 
     FormbuilderModel.prototype.is_input = function() {
       return Formbuilder.inputFields[this.get(Formbuilder.options.mappings.FIELD_TYPE)] != null;
+    };
+
+    FormbuilderModel.prototype.is_editor = function() {
+      return Formbuilder.wysiwygFields[this.get(Formbuilder.options.mappings.FIELD_TYPE)] != null;
+    };
+
+    FormbuilderModel.prototype.getTemplateSuffix = function() {
+      if (this.is_editor()) {
+        return '_wysiwyg';
+      } else if (!this.is_input()) {
+        return '_non_input';
+      } else {
+        return '';
+      }
     };
 
     return FormbuilderModel;
@@ -121,7 +135,7 @@
     };
 
     ViewFieldView.prototype.render = function() {
-      this.$el.addClass('response-field-' + this.model.get(Formbuilder.options.mappings.FIELD_TYPE)).data('cid', this.model.cid).html(Formbuilder.templates["view/base" + (!this.model.is_input() ? '_non_input' : '')]({
+      this.$el.addClass('response-field-' + this.model.get(Formbuilder.options.mappings.FIELD_TYPE)).data('cid', this.model.cid).html(Formbuilder.templates["view/base" + (this.model.getTemplateSuffix())]({
         rf: this.model
       }));
       return this;
@@ -195,7 +209,7 @@
     };
 
     EditFieldView.prototype.render = function() {
-      this.$el.html(Formbuilder.templates["edit/base" + (!this.model.is_input() ? '_non_input' : '')]({
+      this.$el.html(Formbuilder.templates["edit/base" + (this.model.getTemplateSuffix())]({
         rf: this.model
       }));
       rivets.bind(this.$el, {
@@ -287,12 +301,31 @@
 
   })(Backbone.View);
 
+  PolicyEdit = (function(_super) {
+    __extends(PolicyEdit, _super);
+
+    function PolicyEdit() {
+      _ref4 = PolicyEdit.__super__.constructor.apply(this, arguments);
+      return _ref4;
+    }
+
+    PolicyEdit.prototype.initialize = function(options) {
+      this.parentView = options.parentView;
+      return this.render();
+    };
+
+    PolicyEdit.prototype.render = function() {};
+
+    return PolicyEdit;
+
+  })(Backbone.View);
+
   BuilderView = (function(_super) {
     __extends(BuilderView, _super);
 
     function BuilderView() {
-      _ref4 = BuilderView.__super__.constructor.apply(this, arguments);
-      return _ref4;
+      _ref5 = BuilderView.__super__.constructor.apply(this, arguments);
+      return _ref5;
     }
 
     BuilderView.prototype.SUBVIEWS = [];
@@ -307,7 +340,7 @@
 
     BuilderView.prototype.initialize = function(options) {
       var selector;
-      selector = options.selector, this.formBuilder = options.formBuilder, this.bootstrapData = options.bootstrapData;
+      selector = options.selector, this.formBuilder = options.formBuilder, this.bootstrapData = options.bootstrapData, this.withPolicies = options.withPolicies;
       if (selector != null) {
         this.setElement($(selector));
       }
@@ -347,15 +380,19 @@
     };
 
     BuilderView.prototype.render = function() {
-      var subview, _i, _len, _ref5;
+      var subview, _i, _len, _ref6;
       this.$el.html(Formbuilder.templates['page']());
+      if (this.withPolicies) {
+        this.addPolicies();
+      }
       this.$fbLeft = this.$el.find('.fb-menu');
       this.$responseFields = this.$el.find('.fb-response-fields');
+      this.$policyBlock = this.$el.find('.fb-policy-blocks');
       this.bindWindowScrollEvent();
       this.hideShowNoResponseFields();
-      _ref5 = this.SUBVIEWS;
-      for (_i = 0, _len = _ref5.length; _i < _len; _i++) {
-        subview = _ref5[_i];
+      _ref6 = this.SUBVIEWS;
+      for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
+        subview = _ref6[_i];
         new subview({
           parentView: this
         }).render();
@@ -393,21 +430,24 @@
     };
 
     BuilderView.prototype.addOne = function(responseField, _, options) {
-      var $replacePosition, view;
-      view = new ViewFieldView({
-        model: responseField,
-        parentView: this
-      });
-      if (options.$replaceEl != null) {
-        return options.$replaceEl.replaceWith(view.render().el);
-      } else if ((options.position == null) || options.position === -1) {
-        return this.$responseFields.append(view.render().el);
-      } else if (options.position === 0) {
-        return this.$responseFields.prepend(view.render().el);
-      } else if (($replacePosition = this.$responseFields.find(".fb-field-wrapper").eq(options.position))[0]) {
-        return $replacePosition.before(view.render().el);
-      } else {
-        return this.$responseFields.append(view.render().el);
+      var $replacePosition, view, _wrapper;
+      _wrapper = responseField.is_editor() ? this.$policyBlock : this.$responseFields;
+      if (_wrapper) {
+        view = new ViewFieldView({
+          model: responseField,
+          parentView: this
+        });
+        if (options.$replaceEl != null) {
+          return options.$replaceEl.replaceWith(view.render().el);
+        } else if ((options.position == null) || options.position === -1) {
+          return _wrapper.append(view.render().el);
+        } else if (options.position === 0) {
+          return _wrapper.prepend(view.render().el);
+        } else if (($replacePosition = _wrapper.find(".fb-field-wrapper").eq(options.position))[0]) {
+          return $replacePosition.before(view.render().el);
+        } else {
+          return _wrapper.append(view.render().el);
+        }
       }
     };
 
@@ -442,6 +482,7 @@
     BuilderView.prototype.setDraggable = function() {
       var $addFieldButtons,
         _this = this;
+      console.log('set draggable', this.$el);
       $addFieldButtons = this.$el.find("[data-field-type]");
       return $addFieldButtons.draggable({
         connectToSortable: this.$responseFields,
@@ -559,12 +600,12 @@
         data: payload,
         contentType: "application/json",
         success: function(data) {
-          var datum, _i, _len, _ref5;
+          var datum, _i, _len, _ref6;
           _this.updatingBatch = true;
           for (_i = 0, _len = data.length; _i < _len; _i++) {
             datum = data[_i];
-            if ((_ref5 = _this.collection.get(datum.cid)) != null) {
-              _ref5.set({
+            if ((_ref6 = _this.collection.get(datum.cid)) != null) {
+              _ref6.set({
                 id: datum.id
               });
             }
@@ -573,6 +614,10 @@
           return _this.updatingBatch = void 0;
         }
       });
+    };
+
+    BuilderView.prototype.addPolicies = function() {
+      return this.$el.find('.fb-form').prepend(Formbuilder.templates['partials/policy_side']());
     };
 
     return BuilderView;
@@ -707,7 +752,13 @@
         TEXT: 'Text',
         YES_NO: 'Yes/No',
         YES: 'Yes',
-        NO: 'No'
+        NO: 'No',
+        WYSIWYG: 'Text Editor',
+        UPLOAD: 'Upload',
+        ATTACHMENTS: 'Attachments',
+        POLICY_UPLOAD_TEXT: 'Copy and paste text into sections below or upload a draft written using the template to automatically divide it into sections below',
+        POLICY_PLACEHOLDER: 'Place text here...',
+        POLICY: "Policy"
       }
     };
 
@@ -717,21 +768,26 @@
 
     Formbuilder.nonInputFields = {};
 
+    Formbuilder.wysiwygFields = {};
+
     Formbuilder.registerField = function(name, opts) {
-      var x, _i, _len, _ref5;
-      _ref5 = ['view', 'edit', 'addButton'];
-      for (_i = 0, _len = _ref5.length; _i < _len; _i++) {
-        x = _ref5[_i];
+      var x, _i, _len, _ref6;
+      _ref6 = ['view', 'edit', 'addButton'];
+      for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
+        x = _ref6[_i];
         if (opts[x]) {
           opts[x] = _.template(opts[x]);
         }
       }
       opts.field_type = name;
       Formbuilder.fields[name] = opts;
-      if (opts.type === 'non_input') {
-        return Formbuilder.nonInputFields[name] = opts;
-      } else {
-        return Formbuilder.inputFields[name] = opts;
+      switch (opts.type) {
+        case 'non_input':
+          return Formbuilder.nonInputFields[name] = opts;
+        case 'wysiwyg':
+          return Formbuilder.wysiwygFields[name] = opts;
+        default:
+          return Formbuilder.inputFields[name] = opts;
       }
     };
 
@@ -947,6 +1003,17 @@
 }).call(this);
 
 (function() {
+  Formbuilder.registerField('policy', {
+    order: 102,
+    type: 'wysiwyg',
+    view: "<label class=\"fb-wysiwyg-label\"><span><%= rf.get(Formbuilder.options.mappings.LABEL) %></span></label>\n<textarea class=\"fb-editor\" data-placeholder=\"<%= Formbuilder.i18n('POLICY_PLACEHOLDER') %>\"><%= rf.get(Formbuilder.options.mappings.DESCRIPTION) %></textarea>",
+    edit: "<%= Formbuilder.templates['edit/label']() %>",
+    addButton: "<span class='symbol'><span class='fa fa-pencil-square-o'></span></span> <%= Formbuilder.i18n('WYSIWYG') %>"
+  });
+
+}).call(this);
+
+(function() {
   Formbuilder.registerField('yes_no', {
     order: 100,
     view: "<ol style='list-style-type: <%= rf.get(Formbuilder.options.mappings.OPTION_NUMBERING) %>;'>\n<% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>\n  <li>\n    <label class='fb-option'>\n      <input type='radio' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick=\"javascript: return false;\" />\n      <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>\n    </label>\n  </li>\n<% } %>\n\n<% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>\n  <li class='other-option'>\n    <label class='fb-option'>\n      <input type='radio' />\n      <%= Formbuilder.i18n('OTHER') %>\n    </label>\n\n    <input type='text' />\n  </li>\n<% } %>\n</ol>",
@@ -1011,6 +1078,20 @@ __p +=
 '\n' +
 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t) +
 '\n';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["edit/base_wysiwyg"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class=\'fb-edit-section-header\'>' +
+((__t = ( Formbuilder.i18n('POLICY') )) == null ? '' : __t) +
+'</div>\n\n<div class=\'fb-common-wrapper\'>\n    ' +
+((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t) +
+'\n    <div class=\'fb-clear\'></div>\n</div>\n';
 
 }
 return __p
@@ -1087,6 +1168,20 @@ __p += '<div class=\'fb-edit-section-header\'>' +
 '\' />\n    ' +
 ((__t = ( Formbuilder.i18n('ONLY_ACCEPT_INTEGERS') )) == null ? '' : __t) +
 '\n</label>\n';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["edit/label"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<input type=\'text\' data-rv-input=\'model.' +
+((__t = ( Formbuilder.options.mappings.LABEL )) == null ? '' : __t) +
+'\' class="fb-large-input" placeholder="' +
+((__t = ( Formbuilder.i18n('TITLE') )) == null ? '' : __t) +
+'" />\n';
 
 }
 return __p
@@ -1400,6 +1495,24 @@ __p += '<div class=\'fb-menu\'>\n  <ul class=\'fb-tabs\'>\n    <li class=\'activ
 return __p
 };
 
+this["Formbuilder"]["templates"]["partials/policy_side"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="fb-policy-wrapper">\n    <button class="fb-btn-policy-upload">' +
+((__t = ( Formbuilder.i18n('UPLOAD') )) == null ? '' : __t) +
+'</button>&nbsp;<span class="help-block">' +
+((__t = ( Formbuilder.i18n('POLICY_UPLOAD_TEXT') )) == null ? '' : __t) +
+'</span>\n    <div class="fb-policy-blocks"></div>\n    <span class="fb-policy-attachments-label">' +
+((__t = ( Formbuilder.i18n('ATTACHMENTS') )) == null ? '' : __t) +
+'</span>\n    <button class="fb-btn-policy-attach">' +
+((__t = ( Formbuilder.i18n('UPLOAD') )) == null ? '' : __t) +
+'</button>\n</div>';
+
+}
+return __p
+};
+
 this["Formbuilder"]["templates"]["partials/save_button"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -1438,6 +1551,18 @@ __p += '<div class=\'subtemplate-wrapper\'>\n    <div class=\'cover\'></div>\n  
 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
 '\n    ' +
 ((__t = ( Formbuilder.templates['view/duplicate_remove']({rf: rf}) )) == null ? '' : __t) +
+'\n</div>\n';
+
+}
+return __p
+};
+
+this["Formbuilder"]["templates"]["view/base_wysiwyg"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class=\'subtemplate-wrapper\'>\n    ' +
+((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
 '\n</div>\n';
 
 }
