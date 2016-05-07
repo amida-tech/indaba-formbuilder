@@ -4,15 +4,15 @@ class FormbuilderModel extends Backbone.DeepModel
     $wrapper = $(".fb-field-wrapper").filter ( (_, el) => $(el).data('cid') == @cid  )
     $(".fb-field-wrapper").index $wrapper
 
-  is_input: ->
+  isInput: ->
     Formbuilder.inputFields[@get(Formbuilder.options.mappings.FIELD_TYPE)]?
 
-  is_editor: ->
+  isEditor: ->
     Formbuilder.wysiwygFields[@get(Formbuilder.options.mappings.FIELD_TYPE)]?
 
   getTemplateSuffix: ->
-    if @.is_editor() then '_wysiwyg'
-    else if  !@.is_input() then '_non_input'
+    if @.isEditor() then '_wysiwyg'
+    else if  !@.isInput() then '_non_input'
     else ''
 
 class FormbuilderCollection extends Backbone.Collection
@@ -46,6 +46,9 @@ class ViewFieldView extends Backbone.View
     @$el.addClass('response-field-' + @model.get(Formbuilder.options.mappings.FIELD_TYPE))
     .data('cid', @model.cid)
     .html(Formbuilder.templates["view/base#{@model.getTemplateSuffix()}"]({rf: @model}))
+
+    if @model.isEditor()
+      rivets.bind @$el, {model: @model}
 
     return @
 
@@ -260,7 +263,7 @@ class BuilderView extends Backbone.View
       @createAndShowEditView(first_model)
 
   addOne: (responseField, _, options) ->
-    _wrapper = if responseField.is_editor() then @$policyBlock else @$responseFields
+    _wrapper = if responseField.isEditor() then @$policyBlock else @$responseFields
 
     if _wrapper
       view = new ViewFieldView

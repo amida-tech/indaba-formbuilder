@@ -64,18 +64,18 @@
       return $(".fb-field-wrapper").index($wrapper);
     };
 
-    FormbuilderModel.prototype.is_input = function() {
+    FormbuilderModel.prototype.isInput = function() {
       return Formbuilder.inputFields[this.get(Formbuilder.options.mappings.FIELD_TYPE)] != null;
     };
 
-    FormbuilderModel.prototype.is_editor = function() {
+    FormbuilderModel.prototype.isEditor = function() {
       return Formbuilder.wysiwygFields[this.get(Formbuilder.options.mappings.FIELD_TYPE)] != null;
     };
 
     FormbuilderModel.prototype.getTemplateSuffix = function() {
-      if (this.is_editor()) {
+      if (this.isEditor()) {
         return '_wysiwyg';
-      } else if (!this.is_input()) {
+      } else if (!this.isInput()) {
         return '_non_input';
       } else {
         return '';
@@ -138,6 +138,11 @@
       this.$el.addClass('response-field-' + this.model.get(Formbuilder.options.mappings.FIELD_TYPE)).data('cid', this.model.cid).html(Formbuilder.templates["view/base" + (this.model.getTemplateSuffix())]({
         rf: this.model
       }));
+      if (this.model.isEditor()) {
+        rivets.bind(this.$el, {
+          model: this.model
+        });
+      }
       return this;
     };
 
@@ -433,7 +438,7 @@
 
     BuilderView.prototype.addOne = function(responseField, _, options) {
       var $replacePosition, view, _wrapper;
-      _wrapper = responseField.is_editor() ? this.$policyBlock : this.$responseFields;
+      _wrapper = responseField.isEditor() ? this.$policyBlock : this.$responseFields;
       if (_wrapper) {
         view = new ViewFieldView({
           model: responseField,
@@ -1007,7 +1012,7 @@
   Formbuilder.registerField('policy', {
     order: 102,
     type: 'wysiwyg',
-    view: "<label class=\"fb-wysiwyg-label\"><span><%= rf.get(Formbuilder.options.mappings.LABEL) %></span></label>\n<textarea class=\"fb-editor\" data-placeholder=\"<%= Formbuilder.i18n('POLICY_PLACEHOLDER') %>\"><%= rf.get(Formbuilder.options.mappings.DESCRIPTION) %></textarea>",
+    view: "<label class=\"fb-wysiwyg-label\"><span><%= rf.get(Formbuilder.options.mappings.LABEL) %></span></label>\n<textarea class=\"fb-editor\" data-rv-input='model.<%= Formbuilder.options.mappings.DESCRIPTION %>' data-placeholder=\"<%= Formbuilder.i18n('POLICY_PLACEHOLDER') %>\"></textarea> ",
     edit: "<%= Formbuilder.templates['edit/label']() %>",
     addButton: "<span class='symbol'><span class='fa fa-pencil-square-o'></span></span> <%= Formbuilder.i18n('WYSIWYG') %>"
   });

@@ -6,7 +6,7 @@ Formbuilder.registerField 'policy',
 
   view: """
     <label class="fb-wysiwyg-label"><span><%= rf.get(Formbuilder.options.mappings.LABEL) %></span></label>
-    <textarea class="fb-editor" data-placeholder="<%= Formbuilder.i18n('POLICY_PLACEHOLDER') %>"><%= rf.get(Formbuilder.options.mappings.DESCRIPTION) %></textarea>
+    <textarea class="fb-editor" data-rv-input='model.<%= Formbuilder.options.mappings.DESCRIPTION %>' data-placeholder="<%= Formbuilder.i18n('POLICY_PLACEHOLDER') %>"></textarea> 
   """
 
   edit: """
